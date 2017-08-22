@@ -1,4 +1,4 @@
-# QueroDinheiros
+# Financial Education for Children
 
 Aplicação de gerenciamento de finanças pessoais.
 

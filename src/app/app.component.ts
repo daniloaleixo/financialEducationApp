@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`
+  template: `<div>bla</div>`
 })
 //
 // AppCompoennt has all the page with a header

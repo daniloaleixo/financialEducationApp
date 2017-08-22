@@ -1,58 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+
+import { MdToolbarModule, MdIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
-
-import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
-import { SpendingsModule } from './spendings/spendings.module';
-import { InvestmentsModule } from './investments/investments.module';
-import { SettingsModule } from './settings/settings.module';
-import { HistoryModule } from './history/history.module';
-
-import { AuthService } from './auth/auth.service';
-import { LayoutService } from './shared/singletons/layout.service';
-import { DatabaseSnapshotService } from './shared/singletons/database-snapshot.service';
-
-import { appRoutes } from './app.routes';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
-import { MaterializeModule } from 'angular2-materialize';
-
-
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    MaterializeModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    SettingsModule,
-    HttpModule,
-    SharedModule,
-    SpendingsModule,
-    InvestmentsModule,
-    HistoryModule,
-    AuthModule
+    MdToolbarModule,
+    MdIconModule
   ],
-  providers: [AuthService, LayoutService, DatabaseSnapshotService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
