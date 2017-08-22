@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { MdToolbarModule, MdIconModule } from '@angular/material';
+import { MdToolbarModule, MdIconModule, MdInputModule, MdButtonModule } from '@angular/material';
+
+import { CommonModule } from './common/common.module';
 
 import { AppComponent } from './app.component';
 
@@ -13,8 +15,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     MdToolbarModule,
-    MdIconModule
+    MdInputModule,
+    MdIconModule,
+    MdButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
