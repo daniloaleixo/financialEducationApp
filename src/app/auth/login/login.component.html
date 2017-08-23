@@ -1,3 +1,70 @@
-<p>
-  login works!
-</p>
+<div id="content" class=" full-page">
+
+	<div class="row">
+		<div class="col s12 title">
+			Titulo
+		</div>
+	</div>
+	<div class="row">
+
+
+	<!-- There are two forms, one will be the register and the other the login form
+		The idea is that when the user clicks "I don't have an account" the form switches
+		to register form -->
+	    <form class="col s12 m6 l4 centralize">
+		    <div class="input-content">
+			    <div class="row no-margin-bottom">
+			    	<md-input-container class="col s12">
+			    	  <input mdInput name="email" type="email" 
+			    	  placeholder="Digite seu email" 
+			    	  [(ngModel)]="formInfo.email">
+			    	</md-input-container>
+			    </div>
+
+			    <div class="row no-margin-bottom">
+			    	<md-input-container class="col s12">
+			    	  <input mdInput name="password" [(ngModel)]="formInfo.password" type="password" 
+			    	  placeholder="Digite sua senha" >
+			    	</md-input-container>
+			    </div>
+			    <div class="row register-form" *ngIf="registerMode">
+			    	<md-input-container class="col s12">
+			    	  <input mdInput name="password" [(ngModel)]="formInfo.password2" type="password" 
+			    	  placeholder="Repita a senha" >
+			    	</md-input-container>
+			    </div>
+		    </div>
+		    
+		    <!-- Divider -->
+		    <div class="divider-50"></div>
+
+		    <div class="row login-form" *ngIf="!registerMode">
+		    	<div class="col s12">
+		    		<button md-raised-button color="primary" class="full-width" (click)="login()">Login</button>
+		    	</div>
+		    </div>
+		    <div class="row register-form" *ngIf="registerMode">
+		    	<div class="col s12">
+		    		<button md-raised-button color="primary" class="full-width" (click)="register()">Registrar</button>
+		    	</div>
+		    </div>
+		    <div class="row">
+		    	<div class="col s12">
+		    		<button md-raised-button color="primary" class="full-width">Entrar com o Google</button>
+		    	</div>
+		    </div>
+
+		    <!-- Switch to register mode -->
+		    <div class="row">
+		    	<div class="col s12 pointer-cursor">
+		    		<a id="switchToRegisterForm" class="login-form"
+		    		(click)="registerMode = !registerMode"> 
+		    			{{ !registerMode ? 'Ainda não possui uma conta' : 'Já é cadastrado?'}}
+		    		</a>
+		    	</div>
+		    </div>
+	    		
+	    </form>
+
+	</div>
+</div>
