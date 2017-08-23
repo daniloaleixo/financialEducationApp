@@ -25,6 +25,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,6 @@ import { HomeComponent } from './home.component';
     CommonModule,
     AuthModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 
