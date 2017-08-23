@@ -16,18 +16,19 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
-// Material Modules
-import { MdToolbarModule, MdIconModule, MdInputModule, MdButtonModule } from '@angular/material';
-
 
 // My Modules
 import { CommonModule } from './common/common.module';
+import { AuthModule } from './auth/auth.module';
 
+// Components
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     // ROUTES
@@ -37,13 +38,12 @@ import { AppComponent } from './app.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     //REDUX
+
     BrowserModule,
     BrowserAnimationsModule,
+    // My Modules
     CommonModule,
-    MdToolbarModule,
-    MdInputModule,
-    MdIconModule,
-    MdButtonModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
