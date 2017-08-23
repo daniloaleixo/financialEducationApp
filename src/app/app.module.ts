@@ -9,8 +9,6 @@ import { appRoutes } from './app.routes';
 
 
 // REDUX
-import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import { rootReducer, IAppState, INITIAL_STATE } from './store';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -39,7 +37,6 @@ import { AppComponent } from './app.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     //REDUX
-    NgReduxModule, 
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
@@ -53,10 +50,4 @@ import { AppComponent } from './app.component';
 })
 
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    // Tell @angular-redux/store about our rootReducer and our initial state.
-    // It will use this to create a redux store for us and wire up all the
-    // events.
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
-  }
 }
