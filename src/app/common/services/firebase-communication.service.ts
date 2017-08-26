@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { ILoginRequest, ILoginResponse } from '../models/communication.model';
-
+// Firebase
 import { AngularFireAuth, FirebaseAuthStateObservable } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+// Model
+import { ILoginRequest, ILoginResponse } from '../models/communication.model';
 import { communication_constant } from '../constants/communication.constant';
+import { AppState } from '../../app.store';
 
 @Injectable()
 export class FirebaseCommunicationService {
 
-  constructor(private afAuth: AngularFireAuth) {
-  	this.afAuth.authState.subscribe((user: firebase.User) => {
-  		// Link directly with the store
-  		console.log('user', user);
-  	});
+  constructor(private afAuth: AngularFireAuth,
+              private store: Store<AppState>) {
   }
 
   public async loginRegister(request: ILoginRequest): Promise<ILoginResponse> {

@@ -1,4 +1,4 @@
-import { IAuthUser } from './user.model';
+import { IAuthUser } from './auth.model';
 
 export type TRequest = number;
 

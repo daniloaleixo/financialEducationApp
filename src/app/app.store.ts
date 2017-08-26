@@ -1,4 +1,4 @@
-import { IAuthUser } from './auth/auth.model';
+import { IAuthUser } from './common/models/auth.model';
 
 export interface AppState {
   counter: number;

@@ -1,16 +1,11 @@
-import { Action } from '@ngrx/store';
-import { INCREMENT, DECREMENT, RESET } from './auth.actions';
+import * as Auth from './auth.actions';
+import { IAuthUser, ActionImplementation } from '../common/models/barrel-models';
 
-export function authReducer(state: number = 0, action: Action) {
+export function authReducer(state: IAuthUser = null, action: ActionImplementation) {
 	switch (action.type) {
-		case INCREMENT:
-			return state + 1;
-
-		case DECREMENT:
-			return state - 1;
-
-		case RESET:
-			return 0;
+		case Auth.AuthChange.type:
+			console.log('vamo ver', action.payload);
+			return action.payload;
 
 		default:
 			return state;

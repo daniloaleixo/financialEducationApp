@@ -3,11 +3,12 @@ import { RouterModule, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
-import { INCREMENT, DECREMENT, RESET } from './auth/auth.actions';
+import * as Counter from './counter.actions';
 
-interface AppState {
-  counter: number;
-}
+import { AppState } from './app.store';
+
+import { IAuthUser } from './common/models/auth.model';
+
 
 @Component({
   selector: 'app-home',
@@ -17,29 +18,35 @@ interface AppState {
   <button (click)="decrement()">Decrement</button>
 
   <button (click)="reset()">Reset Counter</button>
+  <span>UID: {{ (user ? user.email : 'bla' | async) }}</span>
 				<router-outlet></router-outlet>`
 })
 export class HomeComponent implements OnInit {
 
 	counter: Observable<number>;
+	user: Observable<IAuthUser>;
 
 	constructor(private router: Router, private store: Store<AppState>) {
 		this.counter = store.select('counter');
+		this.user = store.select('auth');
+
+		this.user
+			.subscribe(user => user ? console.log('aqui', user.email) : 'null');
 	}
 	ngOnInit() { }
 
 
 
 	increment(){
-		this.store.dispatch({ type: INCREMENT });
+		this.store.dispatch(new Counter.Increment());
 	}
 
 	decrement(){
-		this.store.dispatch({ type: DECREMENT });
+		this.store.dispatch(new Counter.Decrement());
 	}
 
 	reset(){
-		this.store.dispatch({ type: RESET });
+		this.store.dispatch(new Counter.Reset(3));
 	}
 
 }
