@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.store';
 
-import { IAuthUser } from '../../common/models/barrel-models';
+import { IAuthUser } from '../../shared/models/barrel-models';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';

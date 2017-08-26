@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState } from './app.store';
 
-import { IAuthUser } from './common/models/auth.model';
+import { IAuthUser } from './shared/models/auth.model';
 
 
 @Component({

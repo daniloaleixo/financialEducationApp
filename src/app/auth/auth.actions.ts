@@ -1,5 +1,5 @@
-import { ActionImplementation } from '../common/models/redux.model';
-import { IAuthUser } from '../common/models/auth.model';
+import { ActionImplementation } from '../shared/models/redux.model';
+import { IAuthUser } from '../shared/models/auth.model';
 
 const AUTH_CHANGE  = '[Auth] AuthChange';
 

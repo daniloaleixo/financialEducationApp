@@ -1,5 +1,5 @@
 import * as Auth from './auth.actions';
-import { IAuthUser, ActionImplementation } from '../common/models/barrel-models';
+import { IAuthUser, ActionImplementation } from '../shared/models/barrel-models';
 
 export function authReducer(state: IAuthUser = null, action: ActionImplementation) {
 	switch (action.type) {

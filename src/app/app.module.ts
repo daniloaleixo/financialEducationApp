@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
 
 
 // My Modules
-import { CommonModule } from './common/common.module';
+import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { TestModule } from './test/test.module';
 
@@ -48,7 +48,7 @@ import { HomeComponent } from './home.component';
     BrowserModule,
     BrowserAnimationsModule,
     // My Modules
-    CommonModule,
+    SharedModule,
     AuthModule,
     TestModule
   ],

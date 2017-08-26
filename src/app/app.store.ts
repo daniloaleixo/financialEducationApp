@@ -1,4 +1,4 @@
-import { IAuthUser } from './common/models/auth.model';
+import { IAuthUser } from './shared/models/auth.model';
 
 export interface AppState {
   auth: IAuthUser;

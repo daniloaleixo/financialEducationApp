@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ILoginRequest } from '../../common/models/communication.model';
-import { communication_constant } from '../../common/constants/communication.constant';
+import { ILoginRequest } from '../../shared/models/communication.model';
+import { communication_constant } from '../../shared/constants/communication.constant';
 
-import { ServerCommunicationService } from '../../common/services/server-communication.service';
+import { ServerCommunicationService } from '../../shared/services/server-communication.service';
 
 @Component({
   selector: 'app-login',
