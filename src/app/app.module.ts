@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 // My Modules
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
+import { TestModule } from './test/test.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { HomeComponent } from './home.component';
     // My Modules
     CommonModule,
     AuthModule,
+    TestModule
   ],
   bootstrap: [AppComponent]
 })

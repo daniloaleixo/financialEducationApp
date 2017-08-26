@@ -3,7 +3,6 @@ import { RouterModule, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
-import * as Counter from './counter.actions';
 
 import { AppState } from './app.store';
 
