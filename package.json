@@ -9,7 +9,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-redux/store": "^6.5.7",
     "@angular/animations": "^4.3.2",
     "@angular/cdk": "^2.0.0-beta.8",
     "@angular/cli": "^1.1.0",
@@ -23,6 +22,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@ngrx/store": "^4.0.3",
     "angular2-materialize": "^15.0.4",
     "angularfire2": "^4.0.0-rc.0",
     "core-js": "^2.4.1",
