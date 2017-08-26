@@ -11,7 +11,6 @@ import { appRoutes } from './app.routes';
 // REDUX
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/auth.reducer';
-import { counterReducer } from './counter.reducer';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -43,7 +42,6 @@ import { HomeComponent } from './home.component';
     AngularFireAuthModule,
     //REDUX
     StoreModule.forRoot({
-      counter: counterReducer,
       auth: authReducer
     }),
     BrowserModule,
