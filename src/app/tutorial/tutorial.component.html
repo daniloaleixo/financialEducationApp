@@ -1,3 +1,26 @@
-<p>
-  tutorial works!
-</p>
+
+<div class="row"></div>
+<div class="row">
+	<div class="col s12 carousel-navigator">
+	<!-- <___ -->
+		<button md-mini-fab 
+			(click)="decrement()"
+			disabled="{{ imageIndex == 0 }}">
+			<md-icon>keyboard_arrow_left</md-icon>
+		</button>
+		<button md-button [routerLink]="['/']">Já entendi</button>
+		<!-- ___> -->
+		<button md-mini-fab 
+			(click)="increment()"
+			disabled="{{ imageIndex == imagesUrls.length - 1 }}">
+			<md-icon>keyboard_arrow_right</md-icon>
+		</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12">
+		<img style="width: 100%" [src]="imagesUrls[imageIndex]">	
+	</div>	
+</div>
+
