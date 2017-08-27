@@ -10,6 +10,7 @@ import { appRoutes } from './app.routes';
 
 // REDUX
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './auth/auth.reducer';
 
 // FIREBASE
@@ -22,7 +23,10 @@ import { environment } from '../environments/environment';
 // My Modules
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { InitModule } from './init/init.module';
 import { TestModule } from './test/test.module';
+import { TutorialModule } from './tutorial/tutorial.module';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -45,11 +49,16 @@ import { HomeComponent } from './home.component';
     StoreModule.forRoot({
       auth: authReducer
     }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25 //  Retains last 25 states
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     // My Modules
     SharedModule,
     AuthModule,
+    InitModule,
+    TutorialModule,
     TestModule
   ],
   bootstrap: [AppComponent]
