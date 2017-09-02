@@ -7,5 +7,9 @@ export const routes_constants = {
 	tutorial: {
 		id: 1,
 		path: '/tutorial'
+	},
+	login: {
+		id: 2,
+		path: '/login'
 	}
 };

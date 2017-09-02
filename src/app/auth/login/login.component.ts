@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ILoginRequest } from '../../shared/models/communication.model';
 import { communication_constant } from '../../shared/constants/communication.constant';
+import { routes_constants } from '../../shared/constants/routes.constant';
 
 import { ServerCommunicationService } from '../../shared/services/server-communication.service';
 
@@ -26,22 +27,28 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(): void {
+  public login(): void {
   	this.formInfo.requestType = communication_constant.login;
-		this.serverComm.request(this.formInfo);
+		this.makeRequest(this.formInfo);
 	}
 
-	register(): void {
+	public register(): void {
   	this.formInfo.requestType = communication_constant.register;
-		this.serverComm.request(this.formInfo);
+		this.makeRequest(this.formInfo);
 	}
 
-	loginGoogle(): void {
+	public loginGoogle(): void {
   	this.formInfo.requestType = communication_constant.loginGoogle;
-		this.serverComm.request(this.formInfo);
+  	this.makeRequest(this.formInfo);
 	}
 
-	resetForm(): void {
+
+	private makeRequest(form: ILoginRequest): void {
+		this.serverComm.request(this.formInfo)
+			.then(response => this.router.navigate([routes_constants.init.path]));
+	} 
+
+	private resetForm(): void {
 		this.registerMode = false;
 		this.passwordValidator = '';
 		this.formInfo = {

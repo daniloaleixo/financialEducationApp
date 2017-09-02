@@ -5,8 +5,15 @@
 }
 
 .background-img {
-	background-image: url("../../../assets/tela_login3.png");
-	background-size: cover;
+	background-image: url("/assets/stock-boy2.jpg");
+
+	 /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .title {
