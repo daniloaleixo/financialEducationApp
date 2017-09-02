@@ -26,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
 import { InitModule } from './init/init.module';
 import { TestModule } from './test/test.module';
 import { TutorialModule } from './tutorial/tutorial.module';
+import { MissionsModule } from './missions/missions.module';
 
 
 // Components
@@ -59,7 +60,8 @@ import { HomeComponent } from './home.component';
     AuthModule,
     InitModule,
     TutorialModule,
-    TestModule
+    TestModule,
+    MissionsModule
   ],
   bootstrap: [AppComponent]
 })

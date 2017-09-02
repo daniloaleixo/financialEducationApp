@@ -4,7 +4,6 @@ import { IAuthUser, ActionImplementation } from '../shared/models/barrel-models'
 export function authReducer(state: IAuthUser = null, action: ActionImplementation) {
 	switch (action.type) {
 		case Auth.AuthChange.type:
-			console.log('vamo ver', action.payload);
 			return action.payload;
 
 		default:
