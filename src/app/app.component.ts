@@ -9,6 +9,8 @@ import { AuthChange } from './auth/auth.actions';
 
 import { routes_constants } from './shared/constants/routes.constant';
 
+import { InitAppService } from './shared/services/init-app.service';
+
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent {
 
   constructor(private afAuth: AngularFireAuth,
   						private router: Router,
+              private init: InitAppService,
   						private store: Store<any>) {
 		this.afAuth.authState.subscribe((user: firebase.User) => {
 			// Link directly with the store

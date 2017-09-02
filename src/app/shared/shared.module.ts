@@ -13,6 +13,7 @@ import {
 } from '@angular/material';
 import { MaterializeModule } from 'angular2-materialize';
 
+// My services
 import {
 	ServerCommunicationService
 } from './services/server-communication.service';
@@ -20,6 +21,10 @@ import {
 import {
 	FirebaseCommunicationService
 } from './services/firebase-communication.service';
+
+import {
+  InitAppService
+} from './services/init-app.service';
 
 
 @NgModule({
@@ -31,6 +36,10 @@ import {
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
-  providers: [ServerCommunicationService, FirebaseCommunicationService]
+  providers: [
+    ServerCommunicationService,
+    FirebaseCommunicationService,
+    InitAppService
+  ]
 })
 export class SharedModule { }

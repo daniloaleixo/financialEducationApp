@@ -2,21 +2,52 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 // Firebase
-import { AngularFireAuth, FirebaseAuthStateObservable } from 'angularfire2/auth';
+import { AngularFireAuth,FirebaseAuthStateObservable } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import {
+  AngularFireDatabase,
+  FirebaseObjectObservable
+} from 'angularfire2/database';
 
 // Model
-import { ILoginRequest, ILoginResponse } from '../models/communication.model';
+import {
+  ILoginRequest,
+  ILoginResponse,
+  IGetAllMissionsResponse
+} from '../models/barrel-models';
 import { communication_constant } from '../constants/communication.constant';
 import { AppState } from '../../app.store';
+
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/publishReplay';
 
 @Injectable()
 export class FirebaseCommunicationService {
 
+  private databaseSnapshot: BehaviorSubject<any>;
+
   constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase,
               private store: Store<AppState>) {
+    this.databaseSnapshot = new BehaviorSubject<any>(null);
+    this.databaseSnapshot.publishReplay(1);
+
+    this.getDatabase();
   }
 
+
+  // Get the whole DB
+  private getDatabase(): void {
+    this.db.object('/', { preserveSnapshot: true }).$ref
+      .on('value', (snapshot) => {
+        console.log('database snapshot', snapshot.val());
+        this.databaseSnapshot.next(snapshot.val());
+      });
+  }
+
+
+  // Will login or register user either by email or by google
   public async loginRegister(request: ILoginRequest): Promise<ILoginResponse> {
   	const myResponse: ILoginResponse = {
   		user: null
@@ -43,8 +74,22 @@ export class FirebaseCommunicationService {
   	return myResponse;
   }
 
-  logout(): void {
+  public logout(): void {
   	this.afAuth.auth.signOut();
   }
+
+  public getAllMissions(): Promise<IGetAllMissionsResponse> {
+    return new Promise((resolve, reject) => {
+      this.databaseSnapshot
+      .filter(snapshot => snapshot != null)
+      .subscribe(snapshot => {
+        if(snapshot.missions) resolve(snapshot.missions);
+        else reject('Erro pegar missions');
+      });
+    })
+  }
+
+
+
 
 }

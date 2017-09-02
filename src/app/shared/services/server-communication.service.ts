@@ -27,6 +27,10 @@ export class ServerCommunicationService {
       case communication_constant.register:
       case communication_constant.loginGoogle:
         return this.firebaseComm.loginRegister(<ILoginRequest>request);
+
+      // Get Missions
+      case communication_constant.getMissions:
+        return this.firebaseComm.getAllMissions();
   		default:
   			// code...
   			break;

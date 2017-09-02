@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UUID } from 'angular2-uuid';
+
 @Component({
   selector: 'app-view-missions',
   templateUrl: './view-missions.component.html',
