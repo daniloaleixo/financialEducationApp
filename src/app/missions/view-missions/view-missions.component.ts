@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { UUID } from 'angular2-uuid';
+import { IMission, AppState } from '../../shared/models/barrel-models';
+
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-view-missions',
@@ -9,11 +12,12 @@ import { UUID } from 'angular2-uuid';
 })
 export class ViewMissionsComponent implements OnInit {
 
-	a = [1, 2, 3, 4]
+	missions: Observable<IMission[]>;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+  	this.missions = this.store.select('missions');
   }
 
 }

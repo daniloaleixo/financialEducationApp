@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import { AuthChange } from './auth/auth.actions';
 
 import { routes_constants } from './shared/constants/routes.constant';
+import { AppState } from './app.store';
 
 import { InitAppService } from './shared/services/init-app.service';
 

@@ -1,25 +1,23 @@
 <div class="row"></div>
 
 <div class="row">
-	<div class="col s12 m6 l3" *ngFor="let item of a">
+	<div class="col s12 m6 l3" *ngFor="let mission of (missions | async)">
 
-	<md-card class="example-card">
-	  <md-card-header>
-	    <md-card-title class="card-title">Shiba Inu</md-card-title>
-	  </md-card-header>
-	  <img md-card-image src="assets/tela_login.jpg" alt="Photo of a Shiba Inu">
-	  <md-card-content>
-	    <p>
-	      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-	      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-	      bred for hunting.
-	    </p>
-	  </md-card-content>
-	  <md-card-actions>
-	    <button md-button>LIKE</button>
-	    <button md-button>SHARE</button>
-	  </md-card-actions>
-	</md-card>
+		<md-card class="example-card">
+		  <md-card-header>
+		    <md-card-title class="card-title">{{ mission.title }}</md-card-title>
+		  </md-card-header>
+		  <img md-card-image 
+		  	src="{{ mission.photoURL ? mission.photoURL : 'assets/tela_login.jpg'}}" 
+		  	alt="Photo of the mission">
+		  <md-card-content>
+		    <p>{{ mission.description }}</p>
+		  </md-card-content>
+		  <md-card-actions>
+		    <button md-button>LIKE</button>
+		    <button md-button>SHARE</button>
+		  </md-card-actions>
+		</md-card>
 		
 	</div>
 </div>

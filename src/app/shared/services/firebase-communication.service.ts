@@ -13,6 +13,7 @@ import {
 import {
   ILoginRequest,
   ILoginResponse,
+  IMission,
   IGetAllMissionsResponse
 } from '../models/barrel-models';
 import { communication_constant } from '../constants/communication.constant';
@@ -79,11 +80,12 @@ export class FirebaseCommunicationService {
   }
 
   public getAllMissions(): Promise<IGetAllMissionsResponse> {
-    return new Promise((resolve, reject) => {
+    return new Promise<IGetAllMissionsResponse>((resolve, reject) => {
       this.databaseSnapshot
       .filter(snapshot => snapshot != null)
       .subscribe(snapshot => {
-        if(snapshot.missions) resolve(snapshot.missions);
+        const missions: IMission[] = snapshot.missions;
+        if(missions) resolve({ missions: missions});
         else reject('Erro pegar missions');
       });
     })
