@@ -13,9 +13,9 @@
 		  <md-card-content>
 		    <p>{{ mission.description }}</p>
 		  </md-card-content>
-		  <md-card-actions>
-		    <button md-button>LIKE</button>
-		    <button md-button>SHARE</button>
+		  <md-card-actions class="full-width">
+		    <button md-button (click)="addMission(mission)"
+		    	style="width: 100%">FAZER ESSA MISSÃO</button>
 		  </md-card-actions>
 		</md-card>
 		

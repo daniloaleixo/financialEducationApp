@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import {
 	IRequest,
 	IResponse,
-	ILoginRequest
+	ILoginRequest,
+  IAddMissionRequest
 } from '../models/communication.model';
 import { communication_constant } from '../constants/communication.constant';
 
@@ -31,6 +32,9 @@ export class ServerCommunicationService {
       // Get Missions
       case communication_constant.getMissions:
         return this.firebaseComm.getAllMissions();
+      // Add Mission
+      case communication_constant.addMission:
+        return this.firebaseComm.addMission(<IAddMissionRequest>request);
   		default:
   			// code...
   			break;

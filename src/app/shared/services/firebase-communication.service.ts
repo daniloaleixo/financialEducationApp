@@ -14,6 +14,7 @@ import {
   ILoginRequest,
   ILoginResponse,
   IMission,
+  IAddMissionRequest,
   IGetAllMissionsResponse
 } from '../models/barrel-models';
 import { communication_constant } from '../constants/communication.constant';
@@ -89,6 +90,27 @@ export class FirebaseCommunicationService {
         else reject('Erro pegar missions');
       });
     })
+  }
+
+  public async addMission(request: IAddMissionRequest): Promise<string> {
+    const sucessMessage = 'Missão adiciona com sucesso';
+    const errorMessage = Error('Erro ao adicionar missão');
+
+    return new Promise<string>((resolve, reject) => {
+      // Wait to system to login and then get the database
+      this.afAuth.authState.subscribe((user: firebase.User) => {
+
+        if (user) {
+          this.db.list(`${user.uid}/missions/`)
+          .push(request)
+          .then((res) => { console.log(res); resolve(sucessMessage)})
+          .catch((error: Error) => reject(errorMessage));
+        } else reject(errorMessage);
+        
+      });
+
+    });
+
   }
 
 

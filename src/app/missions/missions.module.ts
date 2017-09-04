@@ -8,7 +8,7 @@ import { MdCardModule, MdButtonModule } from '@angular/material';
   imports: [
     CommonModule,
     MdCardModule,
-    MdButtonModule
+    MdButtonModule,
   ],
   declarations: [ViewMissionsComponent]
 })
