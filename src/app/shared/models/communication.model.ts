@@ -26,6 +26,7 @@ export interface ILoginResponse extends IResponse {
 	user: IAuthUser;
 }
 
-export interface IGetAllMissionsResponse extends IResponse {
+export interface IInitResponse extends IResponse {
 	missions: IMission[];
+	userMissions: string[];
 }

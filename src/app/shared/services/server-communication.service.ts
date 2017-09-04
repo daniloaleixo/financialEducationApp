@@ -30,8 +30,8 @@ export class ServerCommunicationService {
         return this.firebaseComm.loginRegister(<ILoginRequest>request);
 
       // Get Missions
-      case communication_constant.getMissions:
-        return this.firebaseComm.getAllMissions();
+      case communication_constant.init:
+        return this.firebaseComm.init();
       // Add Mission
       case communication_constant.addMission:
         return this.firebaseComm.addMission(<IAddMissionRequest>request);

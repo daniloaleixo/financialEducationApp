@@ -15,12 +15,13 @@ import {
   ILoginResponse,
   IMission,
   IAddMissionRequest,
-  IGetAllMissionsResponse
+  IInitResponse
 } from '../models/barrel-models';
 import { communication_constant } from '../constants/communication.constant';
 import { AppState } from '../../app.store';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/publishReplay';
 
@@ -28,12 +29,15 @@ import 'rxjs/add/operator/publishReplay';
 export class FirebaseCommunicationService {
 
   private databaseSnapshot: BehaviorSubject<any>;
+  private user: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private store: Store<AppState>) {
     this.databaseSnapshot = new BehaviorSubject<any>(null);
     this.databaseSnapshot.publishReplay(1);
+
+    this.user = this.afAuth.authState;
 
     this.getDatabase();
   }
@@ -46,6 +50,13 @@ export class FirebaseCommunicationService {
         console.log('database snapshot', snapshot.val());
         this.databaseSnapshot.next(snapshot.val());
       });
+  }
+
+  public async init(): Promise<IInitResponse> {
+    return {
+      missions: await this.getAllMissions(),
+      userMissions: await this.getUserMissions()
+    };
   }
 
 
@@ -80,40 +91,60 @@ export class FirebaseCommunicationService {
   	this.afAuth.auth.signOut();
   }
 
-  public getAllMissions(): Promise<IGetAllMissionsResponse> {
-    return new Promise<IGetAllMissionsResponse>((resolve, reject) => {
-      this.databaseSnapshot
-      .filter(snapshot => snapshot != null)
-      .subscribe(snapshot => {
-        const missions: IMission[] = snapshot.missions;
-        if(missions) resolve({ missions: missions});
-        else reject('Erro pegar missions');
-      });
-    })
-  }
 
   public async addMission(request: IAddMissionRequest): Promise<string> {
     const sucessMessage = 'Missão adiciona com sucesso';
     const errorMessage = Error('Erro ao adicionar missão');
-
+    
     return new Promise<string>((resolve, reject) => {
-      // Wait to system to login and then get the database
-      this.afAuth.authState.subscribe((user: firebase.User) => {
-
-        if (user) {
+      this.user
+      .filter(user => user != null)
+      .subscribe((user: firebase.User) => {
+        if (this.user) {
           this.db.list(`${user.uid}/missions/`)
-          .push(request)
-          .then((res) => { console.log(res); resolve(sucessMessage)})
+          .push(request.idMission)
+          .then((res) => resolve(sucessMessage))
           .catch((error: Error) => reject(errorMessage));
         } else reject(errorMessage);
-        
-      });
-
+      })
     });
 
   }
 
 
+  private getAllMissions(): Promise<IMission[]> {
+    return new Promise<IMission[]>((resolve, reject) => {
+      this.databaseSnapshot
+      .filter(snapshot => snapshot != null)
+      .subscribe(snapshot => {
+        const missions: IMission[] = snapshot.missions;
+        if(missions) resolve(missions);
+        else reject('Erro pegar missions');
+      });
+    })
+  }
+
+  private getUserMissions(): Promise<string[]> {
+    return new Promise<string[]>((resolve, reject) => {
+      this.user
+      .filter(user => user != null)
+      .subscribe((user: firebase.User) => {
+
+        this.databaseSnapshot
+        .filter(snapshot => snapshot != null)
+        .subscribe(snapshot => {
+          if(snapshot[user.uid]) {
+            const userMissions: string[] = 
+              Object.keys(snapshot[user.uid].missions)
+              .map(key => snapshot[user.uid].missions[key])
+            resolve(userMissions);
+          } 
+          else 
+            resolve([]);
+        });
+      })
+    })
+  }
 
 
 }

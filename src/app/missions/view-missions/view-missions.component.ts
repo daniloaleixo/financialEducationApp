@@ -32,4 +32,8 @@ export class ViewMissionsComponent implements OnInit {
   	.then(res => console.log(res));
   }
 
+  userAlreadyInMission(mission): boolean {
+    
+  }
+
 }
