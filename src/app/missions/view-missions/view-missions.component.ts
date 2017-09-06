@@ -33,7 +33,7 @@ export class ViewMissionsComponent implements OnInit {
   }
 
   userAlreadyInMission(mission): boolean {
-    
+    return true;
   }
 
 }

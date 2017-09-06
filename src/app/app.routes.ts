@@ -23,7 +23,7 @@ export const appRoutes: Routes = [
 				component: InitComponent
 			},
 			{
-				path: routes_constants.tutorial.path.slice(1),
+				path: 'tutorial',
 				component: TutorialComponent
 			},
 			{
@@ -31,14 +31,14 @@ export const appRoutes: Routes = [
 				component: TestComponent
 			},
 			{
-				path: routes_constants.viewMissions.path.slice(1),
+				path: 'missions/view',
 				component: ViewMissionsComponent
 			}
 		],
 		component: HomeComponent
 	},
 	{
-		path: routes_constants.login.path.slice(1),
+		path: 'login',
 		component: LoginComponent
 	},
 ];
