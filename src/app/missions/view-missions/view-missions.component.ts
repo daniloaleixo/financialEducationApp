@@ -6,7 +6,8 @@ import { communication_constant } from '../../shared/constants/communication.con
 
 import { Observable } from 'rxjs/Observable';
 
-import { ServerCommunicationService } from '../../shared/services/server-communication.service';
+import { MissionsService } from '../missions.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-view-missions',
@@ -18,18 +19,20 @@ export class ViewMissionsComponent implements OnInit {
 	missions: Observable<IMission[]>;
 
   constructor(private store: Store<AppState>,
-  						private server: ServerCommunicationService) { }
+              private toast: ToastService,
+  						private missionsService: MissionsService) { }
 
   ngOnInit() {
   	this.missions = this.store.select('missions');
   }
 
   addMission(mission: IMission): void {
-  	this.server.request(<IAddMissionRequest>{
+  	this.missionsService.addMission(<IAddMissionRequest>{
   		idMission: mission.id,
   		requestType: communication_constant.addMission
   	})
-  	.then(res => console.log(res));
+  	.then(res => this.toast.openSnackBar(res, ''))
+    .catch(err => this.toast.openSnackBar(err, ''));
   }
 
   userAlreadyInMission(mission): boolean {

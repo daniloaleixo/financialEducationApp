@@ -17,7 +17,7 @@ import {
   IAddMissionRequest,
   IInitResponse
 } from '../models/barrel-models';
-import { communication_constant } from '../constants/communication.constant';
+import { communication_constant, errorMessages, sucessMessages } from '../constants/barrel-constants';
 import { AppState } from '../../app.store';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -93,8 +93,6 @@ export class FirebaseCommunicationService {
 
 
   public async addMission(request: IAddMissionRequest): Promise<string> {
-    const sucessMessage = 'Missão adiciona com sucesso';
-    const errorMessage = Error('Erro ao adicionar missão');
     
     return new Promise<string>((resolve, reject) => {
       this.user
@@ -103,9 +101,9 @@ export class FirebaseCommunicationService {
         if (this.user) {
           this.db.list(`${user.uid}/missions/`)
           .push(request.idMission)
-          .then((res) => resolve(sucessMessage))
-          .catch((error: Error) => reject(errorMessage));
-        } else reject(errorMessage);
+          .then((res) => resolve(request.idMission))
+          .catch((error: Error) => reject(errorMessages.addMissionError));
+        } else reject(errorMessages.addMissionError);
       })
     });
 
