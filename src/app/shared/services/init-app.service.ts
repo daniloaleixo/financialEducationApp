@@ -6,8 +6,7 @@ import { communication_constant } from '../constants/communication.constant';
 
 import { IInitResponse, AppState, IMission } from '../models/barrel-models';
 
-import { GetMissions } from '../../missions/missions.actions';
-import { GetUserMissions } from '../../missions/user.actions';
+import { GetMissions, GetUserMissions } from '../actions/barrel-actions';
 
 @Injectable()
 export class InitAppService {

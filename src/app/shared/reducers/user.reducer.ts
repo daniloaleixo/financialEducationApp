@@ -1,5 +1,5 @@
-import * as User from './user.actions';
-import { IUser, ActionImplementation } from '../shared/models/barrel-models';
+import * as User from '../actions/user.actions';
+import { IUser, ActionImplementation } from '../models/barrel-models';
 
 
 

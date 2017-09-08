@@ -11,9 +11,7 @@ import { appRoutes } from './app.routes';
 // REDUX
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { authReducer } from './auth/auth.reducer';
-import { missionReducer } from './missions/missions.reducer';
-import { userReducer } from './missions/user.reducer';
+import { authReducer, userReducer, missionReducer } from './shared/reducers/barrel-reducers';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';

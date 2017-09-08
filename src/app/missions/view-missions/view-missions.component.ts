@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 
 import { IMission, AppState, IAddMissionRequest } from '../../shared/models/barrel-models';
 import { communication_constant } from '../../shared/constants/communication.constant';
-import * as User from '../user.actions';
 
 import { Observable } from 'rxjs/Observable';
 

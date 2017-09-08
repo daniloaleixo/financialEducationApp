@@ -1,4 +1,4 @@
-import { ActionImplementation, IUser, IMission } from '../shared/models/barrel-models';
+import { ActionImplementation, IUser, IMission } from '../models/barrel-models';
 
 const GET_USER_MISSIONS  = '[User] GetUserMissions';
 

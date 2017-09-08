@@ -5,7 +5,7 @@ import { ILoginRequest } from '../../shared/models/communication.model';
 import { communication_constant } from '../../shared/constants/communication.constant';
 import { routes_constants } from '../../shared/constants/routes.constant';
 
-import { ServerCommunicationService } from '../../shared/services/server-communication.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
 	public formInfo: ILoginRequest;
 
-  constructor(private serverComm: ServerCommunicationService,
+  constructor(private auth: AuthService,
   						private router: Router) {
   	this.resetForm();
   }
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
 
 
 	private makeRequest(form: ILoginRequest): void {
-		this.serverComm.request(this.formInfo)
-			.then(response => this.router.navigate([routes_constants.init.path]));
+		this.auth.login(this.formInfo)
+			.then(() => this.router.navigate([routes_constants.init.path]));
 	} 
 
 	private resetForm(): void {

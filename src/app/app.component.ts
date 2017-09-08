@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth, FirebaseAuthStateObservable } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-import { AuthChange } from './auth/auth.actions';
+import { AuthChange } from './shared/actions/auth.actions';
 
 import { routes_constants } from './shared/constants/routes.constant';
 import { AppState } from './app.store';
