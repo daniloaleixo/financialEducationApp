@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { ServerCommunicationService } from './server-communication.service';
 import { communication_constant } from '../constants/communication.constant';
 
-import { IInitResponse, AppState } from '../models/barrel-models';
+import { IInitResponse, AppState, IMission } from '../models/barrel-models';
 
 import { GetMissions } from '../../missions/missions.actions';
+import { GetUserMissions } from '../../missions/user.actions';
 
 @Injectable()
 export class InitAppService {
@@ -15,8 +16,15 @@ export class InitAppService {
   						private store: Store<AppState>) {
   	// Get all the missions and put it in the store
   	this.server.request({requestType: communication_constant.init})
-  		.then((response: IInitResponse) => 
-			  this.store.dispatch(new GetMissions(response.missions)));
+  		.then((response: IInitResponse) => {
+  			// Put all the missions in the store
+			  this.store.dispatch(new GetMissions(response.missions))
+
+			  const userMissions: IMission[] = response.missions
+			  	.filter(mission => response.userMissions.indexOf(mission.id) != -1);
+
+			  this.store.dispatch(new GetUserMissions(userMissions));
+  		});
   }
 
 }

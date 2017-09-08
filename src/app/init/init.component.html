@@ -1,3 +1,42 @@
-<p>
-  init works!
-</p>
+<div class="row"></div>
+
+<div *ngIf="userMissions.length > 0">
+	<div class="row">
+		<div class="col s12">
+			<h4>Minhas missões</h4>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12 m6 l3" *ngFor="let mission of userMissions">
+
+			<md-card class="example-card">
+			  <md-card-header>
+			    <md-card-title class="card-title">{{ mission.title }}</md-card-title>
+			  </md-card-header>
+			  <img md-card-image 
+			  	src="{{ mission.photoURL ? mission.photoURL : 'assets/tela_login.jpg'}}" 
+			  	alt="Photo of the mission">
+			  <md-card-content>
+			    <p>{{ mission.description }}</p>
+			  </md-card-content>
+			</md-card>
+			
+		</div>
+	</div>
+</div>
+
+<div *ngIf="userMissions.length <= 0">
+	<div class="row">
+		<div class="col s12">
+			<p>Você ainda não possui nenhum missão essa semana</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12">
+					    <button md-button [routerLink]="[routes_constants.viewMissions.path]"
+		    	style="width: 100%">QUERO UMA NOVA MISSÂO</button>
+		</div>
+	</div>
+</div>

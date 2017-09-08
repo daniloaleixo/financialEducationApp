@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './auth/auth.reducer';
 import { missionReducer } from './missions/missions.reducer';
+import { userReducer } from './missions/user.reducer';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -50,7 +51,8 @@ import { HomeComponent } from './home.component';
     //REDUX
     StoreModule.forRoot({
       auth: authReducer,
-      missions: missionReducer
+      missions: missionReducer,
+      user: userReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states
