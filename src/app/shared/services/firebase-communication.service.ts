@@ -15,12 +15,16 @@ import {
   IResponse,
   ILoginResponse,
   IMission,
+  TMissionHash,
   IUser,
+  IUserMission,
   newUser,
   IAddMissionRequest,
+  IAddMissionResponse,
   IInitResponse,
+  DBUserMissionRelationship,
 } from '../models/barrel-models';
-import { communication_constant, errorMessages, sucessMessages } from '../constants/barrel-constants';
+import { communication_constant, errorMessages, sucessMessages, mission_status } from '../constants/barrel-constants';
 import { AppState } from '../../app.store';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -33,6 +37,8 @@ export class FirebaseCommunicationService {
 
   private databaseSnapshot: BehaviorSubject<any>;
   private user: Observable<firebase.User>;
+
+  private missionHash: TMissionHash = {};
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
@@ -101,16 +107,20 @@ export class FirebaseCommunicationService {
   }
 
 
-  public async addMission(request: IAddMissionRequest): Promise<string> {
+  public async addMission(request: IAddMissionRequest): Promise<IAddMissionResponse> {
     
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<IAddMissionResponse>((resolve, reject) => {
       this.user
       .filter(user => user != null)
       .subscribe((user: firebase.User) => {
         if (this.user) {
+          const dbMission: DBUserMissionRelationship = {
+            idMission: request.idMission,
+            status: mission_status.inProgress
+          };
           this.db.list(`${user.uid}/missions/`)
-          .push(request.idMission)
-          .then((res) => resolve(request.idMission))
+          .push(dbMission)
+          .then((res) => resolve(dbMission))
           .catch((error: Error) => reject(errorMessages.addMissionError));
         } else reject(errorMessages.addMissionError);
       })
@@ -119,13 +129,21 @@ export class FirebaseCommunicationService {
   }
 
 
-  private getAllMissions(): Promise<IMission[]> {
-    return new Promise<IMission[]>((resolve, reject) => {
+  private getAllMissions(): Promise<TMissionHash> {
+    return new Promise<TMissionHash>((resolve, reject) => {
       this.databaseSnapshot
       .filter(snapshot => snapshot != null)
       .subscribe(snapshot => {
         const missions: IMission[] = snapshot.missions;
-        if(missions) resolve(missions);
+        if(missions) {
+          let missionHash: TMissionHash = {};
+          missions.map(mission => missionHash[mission.id] = mission);
+
+          // I have to do this because I do not have the missions yet in memory
+          // In theory the backend would provide the user with all missions
+          this.missionHash = missionHash;
+          resolve(missionHash);
+        }
         else reject('Erro pegar missions');
       });
     })
@@ -146,12 +164,18 @@ export class FirebaseCommunicationService {
             userResponse = snapshot[user.uid];
 
             // Transform mission id in IMissions
-            const userMissionsId: string[] = 
+            const userMissionsId: DBUserMissionRelationship[] = 
               Object.keys(snapshot[user.uid].missions)
               .map(key => snapshot[user.uid].missions[key])
+
             // Put the missions
-            userResponse.userMissions = snapshot.missions
-              .filter((mission: IMission)  => userMissionsId.indexOf(mission.id) != -1);
+            const userMissions: IUserMission[] = userMissionsId
+              .map((missionRel: DBUserMissionRelationship) => {
+                return {
+                  status: missionRel.status,
+                  ... this.missionHash[missionRel.idMission],
+                }
+              });
 
             resolve(userResponse);
           } 

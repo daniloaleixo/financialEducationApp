@@ -5,3 +5,7 @@ export interface IMission {
 	photoURL: string;
 	points: number;
 }
+
+export type TMissionHash = {
+	[idMission: string]: IMission;
+} 

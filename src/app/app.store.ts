@@ -1,7 +1,7 @@
-import { IAuthUser, IMission, IUser } from './shared/models/barrel-models';
+import { IAuthUser, TMissionHash, IUser } from './shared/models/barrel-models';
 
 export interface AppState {
   auth: IAuthUser;
-  missions: IMission[];
+  missions: TMissionHash;
   user: IUser;
 }

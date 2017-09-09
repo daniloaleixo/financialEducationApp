@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { IAddMissionRequest, AppState, IMission } from '../shared/models/barrel-models';
+import {
+  IAddMissionRequest,
+  IAddMissionResponse,
+  IUserMission,
+  AppState,
+  IMission,
+  TMissionHash
+} from '../shared/models/barrel-models';
 import { AddMissionUser } from '../shared/actions/barrel-actions';
 import { sucessMessages, errorMessages } from '../shared/constants/barrel-constants';
 
@@ -15,10 +22,13 @@ export class MissionsService {
 
   addMission(request: IAddMissionRequest): Promise<string> {
   	return new Promise<string>((resolve, reject) => {
-  		this.server.request(request).then(idMission => {
+  		this.server.request(request).then((response: IAddMissionResponse) => {
   			// Add mission to user missions
-  			this.store.select('missions').subscribe((missions: IMission[]) => {
-  				const myMission: IMission = missions.filter(mission => mission.id == idMission).pop();
+  			this.store.select('missions').subscribe((missions: TMissionHash) => {
+  				const myMission: IUserMission = {
+            status: response.status,
+            ...missions[response.idMission]
+          };
   				this.store.dispatch(new AddMissionUser(myMission));
   			});
   			resolve(sucessMessages.addMissionSucess);

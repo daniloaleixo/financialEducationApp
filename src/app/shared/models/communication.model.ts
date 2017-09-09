@@ -1,5 +1,5 @@
 import { IAuthUser } from './auth.model';
-import { IMission } from './mission.model';
+import { IMission, TMissionHash } from './mission.model';
 import { IUser } from './user.model';
 
 export type TRequest = number;
@@ -17,6 +17,11 @@ export interface IAddMissionRequest extends IRequest {
 	idMission: string;
 }
 
+export interface IAddMissionResponse extends IResponse {
+	idMission: string;
+	status: string;
+}
+
 
 
 export interface IResponse {
@@ -28,6 +33,6 @@ export interface ILoginResponse extends IResponse {
 }
 
 export interface IInitResponse extends IResponse {
-	missions: IMission[];
+	missions: TMissionHash;
 	user: IUser;
 }

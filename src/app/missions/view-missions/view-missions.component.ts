@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { IMission, AppState, IAddMissionRequest } from '../../shared/models/barrel-models';
+import { IMission, TMissionHash, AppState, IAddMissionRequest } from '../../shared/models/barrel-models';
 import { communication_constant } from '../../shared/constants/communication.constant';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,14 +16,15 @@ import { ToastService } from '../../shared/services/toast.service';
 })
 export class ViewMissionsComponent implements OnInit {
 
-	missions: Observable<IMission[]>;
+  missions: IMission[];
 
   constructor(private store: Store<AppState>,
               private toast: ToastService,
   						private missionsService: MissionsService) { }
 
   ngOnInit() {
-  	this.missions = this.store.select('missions');
+  	this.store.select('missions').subscribe((missionHash: TMissionHash) => 
+       this.missions = Object.keys(missionHash).map(key => missionHash[key]));
   }
 
   addMission(mission: IMission): void {
