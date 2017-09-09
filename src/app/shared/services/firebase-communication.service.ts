@@ -116,11 +116,15 @@ export class FirebaseCommunicationService {
         if (this.user) {
           const dbMission: DBUserMissionRelationship = {
             idMission: request.idMission,
-            status: mission_status.inProgress
+            status: mission_status.inProgress,
+            progress: 0
           };
           this.db.list(`${user.uid}/missions/`)
           .push(dbMission)
-          .then((res) => resolve(dbMission))
+          .then((res) => resolve({
+              userMission: {...dbMission, ...this.missionHash[dbMission.idMission]}
+            })
+          )
           .catch((error: Error) => reject(errorMessages.addMissionError));
         } else reject(errorMessages.addMissionError);
       })
@@ -173,6 +177,7 @@ export class FirebaseCommunicationService {
               .map((missionRel: DBUserMissionRelationship) => {
                 return {
                   status: missionRel.status,
+                  progress: missionRel.progress,
                   ... this.missionHash[missionRel.idMission],
                 }
               });

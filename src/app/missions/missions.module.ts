@@ -5,6 +5,7 @@ import { ViewMissionsComponent } from './view-missions/view-missions.component';
 import { MdCardModule, MdButtonModule, MdIconModule } from '@angular/material';
 
 import { MissionsService } from './missions.service';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { MissionsService } from './missions.service';
     MdButtonModule,
     MdIconModule
   ],
-  declarations: [ViewMissionsComponent],
+  declarations: [ViewMissionsComponent, MissionDetailsComponent],
   providers: [MissionsService]
 })
 export class MissionsModule { }

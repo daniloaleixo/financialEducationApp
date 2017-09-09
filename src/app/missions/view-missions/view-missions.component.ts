@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import {
   IMission,
   IUserMission,
+  newUserMission,
   TMissionHash,
   AppState,
   IAddMissionRequest,
@@ -46,7 +47,7 @@ export class ViewMissionsComponent extends ParentComponent implements OnInit {
       this.missions = 
       Object.keys(missionHash)
         .map(key => missionHash[key])
-        .map((mission: IMission) => { return {...mission, status: mission_status.toDo} })
+        .map((mission: IMission) => newUserMission(mission))
         .filter((mission: IUserMission) =>
           user.userMissions.filter(userMission => userMission.id == mission.id).length == 0);
 

@@ -26,8 +26,9 @@ export class MissionsService {
   			// Add mission to user missions
   			this.store.select('missions').subscribe((missions: TMissionHash) => {
   				const myMission: IUserMission = {
-            status: response.status,
-            ...missions[response.idMission]
+            status: response.userMission.status,
+            progress: response.userMission.progress,
+            ...missions[response.userMission.id]
           };
   				this.store.dispatch(new AddMissionUser(myMission));
   			});
