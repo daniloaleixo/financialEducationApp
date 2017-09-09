@@ -10,3 +10,10 @@ export function authReducer(state: IAuthUser = null, action: ActionImplementatio
 			return state;
 	}
 }
+
+
+export function logout(reducer) {
+  return function (state, action: ActionImplementation) {
+    return reducer(action.type === Auth.Logout.type ? undefined : state, action);
+  }
+}

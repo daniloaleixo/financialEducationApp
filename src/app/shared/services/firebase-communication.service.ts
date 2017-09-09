@@ -12,6 +12,7 @@ import {
 // Model
 import {
   ILoginRequest,
+  IResponse,
   ILoginResponse,
   IMission,
   IAddMissionRequest,
@@ -77,9 +78,11 @@ export class FirebaseCommunicationService {
         .createUserWithEmailAndPassword(request.email, request.password);
 
     // Login google
-    if(request.requestType === communication_constant.loginGoogle)
-      myResponse.user = await this.afAuth.auth
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    if(request.requestType === communication_constant.loginGoogle){
+      const result = await this.afAuth.auth
+        .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      myResponse.user = result.user;
+    }
 
   	if(myResponse.user == null) 
       console.error('Não consegui fazer o login, deu algum erro');
@@ -87,8 +90,12 @@ export class FirebaseCommunicationService {
   	return myResponse;
   }
 
-  public logout(): void {
-  	this.afAuth.auth.signOut();
+  public logout(): Promise<IResponse> {
+    return new Promise<IResponse>((resolve, reject) => {
+  	  this.afAuth.auth.signOut()
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
   }
 
 

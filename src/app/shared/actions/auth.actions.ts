@@ -2,6 +2,7 @@ import { ActionImplementation } from '../models/redux.model';
 import { IAuthUser } from '../models/auth.model';
 
 const AUTH_CHANGE  = '[Auth] AuthChange';
+const LOGOUT = '[Auth] LOGOUT';
 
 
 export class AuthChange extends ActionImplementation {
@@ -10,5 +11,14 @@ export class AuthChange extends ActionImplementation {
 
   constructor(public payload: IAuthUser) {
   	super(payload);
+  }
+}
+
+export class Logout extends ActionImplementation {
+  readonly type = LOGOUT;
+  public static type = LOGOUT;
+
+  constructor() {
+  	super();
   }
 }

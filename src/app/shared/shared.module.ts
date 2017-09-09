@@ -21,9 +21,7 @@ import {
 import {
 	FirebaseCommunicationService
 } from './services/firebase-communication.service';
-import {
-  InitAppService
-} from './services/init-app.service';
+
 import { ToastService } from './services/toast.service'
 
 @NgModule({
@@ -39,7 +37,6 @@ import { ToastService } from './services/toast.service'
   providers: [
     ServerCommunicationService,
     FirebaseCommunicationService,
-    InitAppService,
     ToastService
   ]
 })

@@ -11,7 +11,7 @@ import { appRoutes } from './app.routes';
 // REDUX
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { authReducer, userReducer, missionReducer } from './shared/reducers/barrel-reducers';
+import { authReducer, logout, userReducer, missionReducer } from './shared/reducers/barrel-reducers';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -28,6 +28,9 @@ import { TestModule } from './test/test.module';
 import { TutorialModule } from './tutorial/tutorial.module';
 import { MissionsModule } from './missions/missions.module';
 
+// My Services
+import { AuthService } from './auth/auth.service';
+import { InitAppService } from './shared/services/init-app.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -51,6 +54,9 @@ import { HomeComponent } from './home.component';
       auth: authReducer,
       missions: missionReducer,
       user: userReducer
+    },
+    {
+      metaReducers: [logout]
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states
@@ -65,7 +71,11 @@ import { HomeComponent } from './home.component';
     TestModule,
     MissionsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    AuthService,
+    InitAppService
+  ]
 })
 
 export class AppModule {

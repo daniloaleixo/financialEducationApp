@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 // Material
 import { MdInputModule, MdButtonModule } from '@angular/material';
 
-import { AuthService } from './auth.service';
+
 
 @NgModule({
   imports: [
@@ -17,6 +17,5 @@ import { AuthService } from './auth.service';
     MdButtonModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthService]
 })
 export class AuthModule { }

@@ -13,6 +13,10 @@ export class InitAppService {
 
   constructor(private server: ServerCommunicationService,
   						private store: Store<AppState>) {
+    this.initSystem();
+  }
+
+  public initSystem(): void {
   	// Get all the missions and put it in the store
   	this.server.request({requestType: communication_constant.init})
   		.then((response: IInitResponse) => {

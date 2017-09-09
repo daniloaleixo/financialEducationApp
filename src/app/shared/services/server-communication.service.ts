@@ -23,11 +23,21 @@ export class ServerCommunicationService {
   // The goal here is to put everything under one function that handles it
   public request(request: IRequest): Promise<IResponse> {
   	switch (request.requestType) {
+
+      // *********************************************
+      // 
+      //             AUTH
+      // 
+      // *********************************************
+
   		// LOGIN
   		case communication_constant.login:
       case communication_constant.register:
       case communication_constant.loginGoogle:
         return this.firebaseComm.loginRegister(<ILoginRequest>request);
+
+      case communication_constant.logout:
+        return this.firebaseComm.logout();
 
       // Get Missions
       case communication_constant.init:
