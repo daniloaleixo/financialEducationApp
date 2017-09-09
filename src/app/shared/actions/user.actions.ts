@@ -1,14 +1,14 @@
 import { ActionImplementation, IUser, IMission } from '../models/barrel-models';
 
-const GET_USER_MISSIONS  = '[User] GetUserMissions';
+const UPDATE_USER  = '[User] UpdateUser';
 const ADD_MISSION_USER  = '[User] AddMissionUser';
 
 
-export class GetUserMissions extends ActionImplementation {
-  readonly type = GET_USER_MISSIONS;
-  public static type = GET_USER_MISSIONS;
+export class UpdateUser extends ActionImplementation {
+  readonly type = UPDATE_USER;
+  public static type = UPDATE_USER;
 
-  constructor(public payload: IMission[]) {
+  constructor(public payload: IUser) {
   	super(payload);
   }
 }
@@ -18,6 +18,6 @@ export class AddMissionUser extends ActionImplementation {
   public static type = ADD_MISSION_USER;
 
   constructor(public payload: IMission) {
-  	super(payload);
+    super(payload);
   }
 }

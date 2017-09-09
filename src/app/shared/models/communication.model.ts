@@ -1,5 +1,6 @@
 import { IAuthUser } from './auth.model';
 import { IMission } from './mission.model';
+import { IUser } from './user.model';
 
 export type TRequest = number;
 
@@ -28,5 +29,5 @@ export interface ILoginResponse extends IResponse {
 
 export interface IInitResponse extends IResponse {
 	missions: IMission[];
-	userMissions: string[];
+	user: IUser;
 }

@@ -15,8 +15,10 @@ import {
   IResponse,
   ILoginResponse,
   IMission,
+  IUser,
+  newUser,
   IAddMissionRequest,
-  IInitResponse
+  IInitResponse,
 } from '../models/barrel-models';
 import { communication_constant, errorMessages, sucessMessages } from '../constants/barrel-constants';
 import { AppState } from '../../app.store';
@@ -56,7 +58,7 @@ export class FirebaseCommunicationService {
   public async init(): Promise<IInitResponse> {
     return {
       missions: await this.getAllMissions(),
-      userMissions: await this.getUserMissions()
+      user: await this.getUserInfo()
     };
   }
 
@@ -129,8 +131,10 @@ export class FirebaseCommunicationService {
     })
   }
 
-  private getUserMissions(): Promise<string[]> {
-    return new Promise<string[]>((resolve, reject) => {
+  private getUserInfo(): Promise<IUser> {
+    let userResponse: IUser = newUser();
+
+    return new Promise<IUser>((resolve, reject) => {
       this.user
       .filter(user => user != null)
       .subscribe((user: firebase.User) => {
@@ -139,13 +143,20 @@ export class FirebaseCommunicationService {
         .filter(snapshot => snapshot != null)
         .subscribe(snapshot => {
           if(snapshot[user.uid]) {
-            const userMissions: string[] = 
+            userResponse = snapshot[user.uid];
+
+            // Transform mission id in IMissions
+            const userMissionsId: string[] = 
               Object.keys(snapshot[user.uid].missions)
               .map(key => snapshot[user.uid].missions[key])
-            resolve(userMissions);
+            // Put the missions
+            userResponse.userMissions = snapshot.missions
+              .filter((mission: IMission)  => userMissionsId.indexOf(mission.id) != -1);
+
+            resolve(userResponse);
           } 
-          else 
-            resolve([]);
+          else
+            resolve(userResponse);
         });
       })
     })

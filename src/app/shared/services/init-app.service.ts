@@ -6,7 +6,7 @@ import { communication_constant } from '../constants/communication.constant';
 
 import { IInitResponse, AppState, IMission } from '../models/barrel-models';
 
-import { GetMissions, GetUserMissions } from '../actions/barrel-actions';
+import { GetMissions, UpdateUser } from '../actions/barrel-actions';
 
 @Injectable()
 export class InitAppService {
@@ -23,10 +23,7 @@ export class InitAppService {
   			// Put all the missions in the store
 			  this.store.dispatch(new GetMissions(response.missions))
 
-			  const userMissions: IMission[] = response.missions
-			  	.filter(mission => response.userMissions.indexOf(mission.id) != -1);
-
-			  this.store.dispatch(new GetUserMissions(userMissions));
+			  this.store.dispatch(new UpdateUser(response.user));
   		});
   }
 

@@ -5,8 +5,8 @@ import { IUser, ActionImplementation } from '../models/barrel-models';
 
 export function userReducer(state: IUser = null, action: ActionImplementation): IUser {
 	switch (action.type) {
-		case User.GetUserMissions.type:
-			return { userMissions: action.payload, ...state };
+		case User.UpdateUser.type:
+			return action.payload;
 
 		case User.AddMissionUser.type:
 			state.userMissions.push(action.payload);
