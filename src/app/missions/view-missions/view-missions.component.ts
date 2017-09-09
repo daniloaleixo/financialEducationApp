@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { IMission, TMissionHash, AppState, IAddMissionRequest, IUser } from '../../shared/models/barrel-models';
-import { communication_constant } from '../../shared/constants/communication.constant';
+import {
+  IMission,
+  IUserMission,
+  TMissionHash,
+  AppState,
+  IAddMissionRequest,
+  IUser,
+  ParentComponent
+} from '../../shared/models/barrel-models';
+import { communication_constant, mission_status } from '../../shared/constants/barrel-constants';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -16,13 +24,15 @@ import { ToastService } from '../../shared/services/toast.service';
   templateUrl: './view-missions.component.html',
   styleUrls: ['./view-missions.component.scss']
 })
-export class ViewMissionsComponent implements OnInit {
+export class ViewMissionsComponent extends ParentComponent implements OnInit {
 
-  missions: IMission[];
+  missions: IUserMission[];
 
   constructor(private store: Store<AppState>,
               private toast: ToastService,
-  						private missionsService: MissionsService) { }
+  						private missionsService: MissionsService) {
+    super();
+  }
 
   ngOnInit() {
     const myUser: Observable<IUser> = this.store.select('user').filter(user => user != null);
@@ -36,21 +46,23 @@ export class ViewMissionsComponent implements OnInit {
       this.missions = 
       Object.keys(missionHash)
         .map(key => missionHash[key])
-        .filter((mission: IMission) => {
-          if(user.userMissions)
-            return user.userMissions.filter(userMission => userMission.id == mission.id).length == 0;
-          else return false;
-        });
+        .map((mission: IMission) => { return {...mission, status: mission_status.toDo} })
+        .filter((mission: IUserMission) =>
+          user.userMissions.filter(userMission => userMission.id == mission.id).length == 0);
 
      }, (err) => console.error('bla', err));
   }
 
-  addMission(mission: IMission): void {
+  addMission(mission: IUserMission): void {
   	this.missionsService.addMission(<IAddMissionRequest>{
   		idMission: mission.id,
   		requestType: communication_constant.addMission
   	})
-  	.then(res => this.toast.openSnackBar(res, ''))
+  	.then(res => {
+      // Also set this mission as unclickable
+      mission.status = mission_status.inProgress;
+      this.toast.openSnackBar(res, '')
+    })
     .catch(err => this.toast.openSnackBar(err, ''));
   }
 

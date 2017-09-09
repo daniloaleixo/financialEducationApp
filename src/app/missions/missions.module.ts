@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewMissionsComponent } from './view-missions/view-missions.component';
 
-import { MdCardModule, MdButtonModule } from '@angular/material';
+import { MdCardModule, MdButtonModule, MdIconModule } from '@angular/material';
 
 import { MissionsService } from './missions.service';
 
@@ -11,6 +11,7 @@ import { MissionsService } from './missions.service';
     CommonModule,
     MdCardModule,
     MdButtonModule,
+    MdIconModule
   ],
   declarations: [ViewMissionsComponent],
   providers: [MissionsService]

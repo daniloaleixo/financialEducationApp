@@ -14,8 +14,13 @@
 		    <p>{{ mission.description }}</p>
 		  </md-card-content>
 		  <md-card-actions class="full-width">
-		    <button md-button (click)="addMission(mission)"
+		    <button md-button
+		    	*ngIf="mission.status == mission_status.toDo" 
+		    	(click)="addMission(mission)"
 		    	style="width: 100%">FAZER ESSA MISSÃO</button>
+		    <button md-button disabled
+		    	*ngIf="mission.status == mission_status.inProgress"
+		    	style="width: 100%"><md-icon>check_circle</md-icon> MISSÃO ADICIONADA</button>
 		  </md-card-actions>
 		</md-card>
 		
