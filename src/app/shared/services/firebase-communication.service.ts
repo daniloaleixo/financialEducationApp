@@ -169,7 +169,7 @@ export class FirebaseCommunicationService {
               .map(key => snapshot[user.uid].missions[key])
 
             // Put the missions
-            const userMissions: IUserMission[] = userMissionsId
+            userResponse.userMissions = userMissionsId
               .map((missionRel: DBUserMissionRelationship) => {
                 return {
                   status: missionRel.status,
