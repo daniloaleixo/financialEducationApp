@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { IMission, AppState, IUser, ParentComponent } from '../shared/models/barrel-models';
+import { IUserMission, AppState, IUser, ParentComponent } from '../shared/models/barrel-models';
+import { mission_status } from '../shared/constants/barrel-constants';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -13,17 +14,19 @@ import { Observable } from 'rxjs/Observable';
 })
 export class InitComponent extends ParentComponent implements OnInit {
 
-	public userMissions: IMission[];
+  public userMissions: IUserMission[];
 
   constructor(private store: Store<AppState>, private router: Router) {
     super();
-  	this.userMissions = [];
+    this.userMissions = [];
   }
 
   ngOnInit() {
   	this.store.select('user')
       .filter(user => user != null)
-  		.subscribe((user: IUser) => this.userMissions = user.userMissions);
+  		.subscribe((user: IUser) =>
+        this.userMissions = user.userMissions
+          .filter(mission => mission.status == mission_status.inProgress));
   }
 
   goToMissions(): void {
