@@ -11,7 +11,13 @@ import { appRoutes } from './app.routes';
 // REDUX
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { authReducer, logout, userReducer, missionReducer } from './shared/reducers/barrel-reducers';
+import {
+  authReducer,
+  logout,
+  userReducer,
+  missionReducer,
+  layoutReducer
+} from './shared/reducers/barrel-reducers';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -53,7 +59,8 @@ import { HomeComponent } from './home.component';
     StoreModule.forRoot({
       auth: authReducer,
       missions: missionReducer,
-      user: userReducer
+      user: userReducer,
+      layout: layoutReducer
     },
     {
       metaReducers: [logout]
