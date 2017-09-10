@@ -11,11 +11,11 @@ import {
   IUser,
   ParentComponent
 } from '../../shared/models/barrel-models';
-import { communication_constant, mission_status } from '../../shared/constants/barrel-constants';
+import { communication_constant, mission_status, routes_constants } from '../../shared/constants/barrel-constants';
+import { ChangeHeaderText } from '../../shared/actions/barrel-actions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/of'
 
 import { MissionsService } from '../missions.service';
 import { ToastService } from '../../shared/services/toast.service';
@@ -33,6 +33,7 @@ export class ViewMissionsComponent extends ParentComponent implements OnInit {
               private toast: ToastService,
   						private missionsService: MissionsService) {
     super();
+    this.store.dispatch(new ChangeHeaderText(routes_constants.viewMissions.header));
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.store';
-import { IAuthUser, ParentComponent } from '../../models/barrel-models';
+import { IAuthUser, ILayout, ParentComponent } from '../../models/barrel-models';
 import { routes_constants } from '../../constants/barrel-constants';
 
 import { MaterializeAction, MaterializeDirective } from 'angular2-materialize';
@@ -23,15 +23,16 @@ export class HeaderComponent extends ParentComponent implements OnInit {
 	sidenavParams;
 	currentRoute: string;
 
-	public user: Observable<IAuthUser>; 
+  public user: Observable<IAuthUser>;
+	public headerText: string;
 
   constructor(private store: Store<AppState>,
               private router: Router,
               private toast: ToastService,
               private auth: AuthService) {
     super();
-    this.routes_constants.init.path
-  	this.user = this.store.select('auth');
+    this.user = this.store.select('auth');
+  	this.store.select('layout').subscribe((layout: ILayout) => this.headerText = layout.headerText);
     this.sidenavActions = new EventEmitter<any>();
   }
 

@@ -1,9 +1,9 @@
 import * as Layout from '../actions/layout.actions';
-import { ILayout, ActionImplementation } from '../models/barrel-models';
+import { ILayout, defaultLayout, ActionImplementation } from '../models/barrel-models';
 
 
 
-export function layoutReducer(state: ILayout = null, action: ActionImplementation): ILayout {
+export function layoutReducer(state: ILayout = defaultLayout(), action: ActionImplementation): ILayout {
 	switch (action.type) {
 
 		// ChangeHeaderText

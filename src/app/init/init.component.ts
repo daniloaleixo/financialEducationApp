@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { IUserMission, AppState, IUser, ParentComponent } from '../shared/models/barrel-models';
-import { mission_status } from '../shared/constants/barrel-constants';
+import { mission_status, routes_constants } from '../shared/constants/barrel-constants';
+import { ChangeHeaderText } from '../shared/actions/barrel-actions';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -18,6 +19,7 @@ export class InitComponent extends ParentComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private router: Router) {
     super();
+    this.store.dispatch(new ChangeHeaderText(routes_constants.init.header));
     this.userMissions = [];
   }
 
