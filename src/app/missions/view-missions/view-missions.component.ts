@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import {
@@ -30,6 +31,7 @@ export class ViewMissionsComponent extends ParentComponent implements OnInit {
   missions: IUserMission[];
 
   constructor(private store: Store<AppState>,
+              private router: Router,
               private toast: ToastService,
   						private missionsService: MissionsService) {
     super();
@@ -70,6 +72,11 @@ export class ViewMissionsComponent extends ParentComponent implements OnInit {
 
   userAlreadyInMission(mission): boolean {
     return true;
+  }
+
+
+  seeDetails(mission: IUserMission) {
+    this.router.navigate([routes_constants.missionDetails.path.replace(':idMission', mission.id)]);
   }
 
 }

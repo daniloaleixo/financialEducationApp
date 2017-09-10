@@ -17,7 +17,8 @@ export class InitComponent extends ParentComponent implements OnInit {
 
   public userMissions: IUserMission[];
 
-  constructor(private store: Store<AppState>, private router: Router) {
+  constructor(private store: Store<AppState>,
+              private router: Router) {
     super();
     this.store.dispatch(new ChangeHeaderText(routes_constants.init.header));
     this.userMissions = [];
@@ -33,7 +34,11 @@ export class InitComponent extends ParentComponent implements OnInit {
   }
 
   goToMissions(): void {
-    this.router.navigate([this.routes_constants.viewMissions.path])
+    this.router.navigate([routes_constants.viewMissions.path])
+  }
+
+  seeDetails(mission: IUserMission) {
+    this.router.navigate([routes_constants.missionDetails.path.replace(':idMission', mission.id)]);
   }
 
 }

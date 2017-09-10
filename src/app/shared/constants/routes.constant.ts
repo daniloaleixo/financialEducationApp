@@ -18,5 +18,10 @@ export const routes_constants = {
 		id: 3,
 		header: 'Missões',
 		path: '/missions/view'
+	},
+	missionDetails: {
+		id: 4,
+		header: 'Missões',
+		path: '/missions/:idMission'
 	}
 };

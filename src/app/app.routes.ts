@@ -12,6 +12,7 @@ import { InitComponent } from './init/init.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 
 import { ViewMissionsComponent } from './missions/view-missions/view-missions.component';
+import { MissionDetailsComponent } from './missions/mission-details/mission-details.component';
 
 
 export const appRoutes: Routes = [
@@ -33,6 +34,10 @@ export const appRoutes: Routes = [
 			{
 				path: 'missions/view',
 				component: ViewMissionsComponent
+			},
+			{
+				path: 'missions/:idMission',
+				component: MissionDetailsComponent
 			}
 		],
 		component: HomeComponent
