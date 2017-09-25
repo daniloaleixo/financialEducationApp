@@ -46,7 +46,7 @@ import { HomeComponent } from './home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     // ROUTES

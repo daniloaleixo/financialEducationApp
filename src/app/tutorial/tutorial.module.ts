@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TutorialComponent } from './tutorial.component';
 
 import { MdIconModule, MdButtonModule } from '@angular/material';
+import { FirstTimeComponent } from './first-time/first-time.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { MdIconModule, MdButtonModule } from '@angular/material';
     MdIconModule,
     MdButtonModule
   ],
-  declarations: [TutorialComponent]
+  declarations: [TutorialComponent, FirstTimeComponent]
 })
 export class TutorialModule { }
