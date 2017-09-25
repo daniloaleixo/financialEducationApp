@@ -24,10 +24,6 @@ export const appRoutes: Routes = [
 				component: InitComponent
 			},
 			{
-				path: 'tutorial',
-				component: TutorialComponent
-			},
-			{
 				path: 'test',
 				component: TestComponent
 			},
@@ -45,6 +41,10 @@ export const appRoutes: Routes = [
 	{
 		path: 'login',
 		component: LoginComponent
+	},
+	{
+		path: 'tutorial',
+		component: TutorialComponent
 	},
 ];
 
