@@ -25,6 +25,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
+//Third parties
+import { MyDatePickerModule } from 'mydatepicker';
+
 
 // My Modules
 import { SharedModule } from './shared/shared.module';
@@ -70,6 +73,7 @@ import { HomeComponent } from './home.component';
     }),
     BrowserModule,
     BrowserAnimationsModule,
+    MyDatePickerModule,
     // My Modules
     SharedModule,
     AuthModule,

@@ -2,6 +2,7 @@ import { IMission } from './mission.model';
 import { mission_status } from '../constants/barrel-constants';
 
 export type TAllowanceFrequence = 'W' | 'M';
+export type TGenre = 'M' | 'W';
 
 export interface IUser {
 	firstTime: boolean;
@@ -12,6 +13,7 @@ export interface IUser {
 	amount: number;
 	experience: number;
 	level: number;
+	genre: TGenre;
 }
 
 export interface IUserMission extends IMission {
@@ -28,7 +30,8 @@ export function newUser(): IUser {
 		frequence: 'W',
 		amount: 0,
 		experience: 0,
-		level: 0
+		level: 0,
+		genre: 'M'
 	};
 }
 

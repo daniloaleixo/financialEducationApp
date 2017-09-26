@@ -8,3 +8,9 @@ input {
 	box-shadow: none !important;
 	height: 2rem !important;
 }
+
+.centralize-horizontal {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

@@ -1,9 +1,39 @@
 <div id="outside-content"> 
 	<div class="centralize-vertical">
 		<div class="centralize-horizontal">
-			<p>
-			  first-time works!
-			</p>
+			<span [ngSwitch]="step">
+	        	<div *ngSwitchCase="0" style="text-align: center">
+	        		<p>Sou</p>
+	        		<md-select placeholder="Gênero" (change)="changeGenre($event.value)">
+	        		  <md-option *ngFor="let genre of genres" 
+	        		  	[value]="genre.value">
+	        		    {{ genre.name }}
+	        		  </md-option>
+	        		</md-select>
+	        		<p>E nasci em</p>
+	        		<div style="display: flex; justify-content: center;">
+		  	        	<div class="input-field" style="width: 50%">
+		  	          		<i class="material-icons prefix">today</i>
+		  	          		<my-date-picker class="datepicker" name="mydate" [options]="myDatePickerOptions" [ngModel]="user.birthDate" #datepicker
+		  	          		(ngModelChange)="changeBirthDate($event)" required></my-date-picker>
+		  	        	</div>
+	        		</div>
+	        	</div>
+
+
+
+	        	<div class="row"></div>
+
+	        	<div class="row centralize-horizontal">
+					<button md-raised-button color="accent" (click)="step = step - 1"
+						disabled="{{ step == 0 }}">
+						Voltar
+					</button>
+					<button md-raised-button color="accent" (click)="step = step + 1">
+						Avançar
+					</button>
+	        	</div>
+			</span>
 		</div>
 	</div>
 </div>
