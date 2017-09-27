@@ -2,6 +2,8 @@
 	<div class="centralize-vertical">
 		<div class="centralize-horizontal">
 			<span [ngSwitch]="step">
+
+				<!-- First step -->
 	        	<div *ngSwitchCase="0" style="text-align: center">
 	        		<p>Sou</p>
 	        		<md-select placeholder="Gênero" (change)="changeGenre($event.value)">
@@ -20,6 +22,51 @@
 	        		</div>
 	        	</div>
 
+	        	<div *ngSwitchCase="1" style="text-align: center">
+	        		<p>Você recebe mesada <br>
+	        		ou semanada?</p>
+		        	<md-radio-group class="example-radio-group" [(ngModel)]="user.receiveAllowance">
+					  <md-radio-button class="example-radio-button" [value]="true">
+					    Sim
+					  </md-radio-button>
+					  <span style="margin-left: 10px"></span>
+					  <md-radio-button class="example-radio-button" [value]="false">
+					    Não
+					  </md-radio-button>
+					</md-radio-group>
+					<br>
+					<br>
+					<span *ngIf="user.receiveAllowance" >
+						<md-select placeholder="Com que frequência?" 
+						(change)="changeAllowanceFreq($event.value)">
+						  <md-option *ngFor="let freq of frequences" 
+						  	[value]="freq.value">
+						    {{ freq.name }}
+						  </md-option>
+						</md-select>
+					</span>
+					<br>
+					<br>
+					<span *ngIf="user.receiveAllowance">
+					  <md-input-container>
+					    <input mdInput placeholder="Valor" type="number" [(ngModel)]="user.amount">
+					  </md-input-container>
+					</span>
+	        	</div>
+
+	        	<div *ngSwitchCase="2" style="text-align: center">
+		        		<img class="circle" 
+		        			[src]="(authUser | async).photoURL || '../../assets/avatar.png'">
+		        		
+	        		<p style="margin: 0 1rem;">
+	        			Bem vindo {{ (authUser | async).displayName }}, <br>
+	        		 A partir de agora vamos começar uma jornada através de desafios para você aprender a lidar com o dinheiro </p>
+	        		<br>
+	        		<p>Level {{ user.level }} (<small>{{ user.experience }}XP</small>)</p>
+	        	</div>
+
+
+
 
 
 	        	<div class="row"></div>
@@ -29,8 +76,13 @@
 						disabled="{{ step == 0 }}">
 						Voltar
 					</button>
-					<button md-raised-button color="accent" (click)="step = step + 1">
+					<button md-raised-button color="accent"
+					(click)="step = step + 1" *ngIf="step < 2">
 						Avançar
+					</button>
+					<button md-raised-button color="accent"
+					(click)="updateUser()" *ngIf="step == 2">
+						Finalizar
 					</button>
 	        	</div>
 			</span>

@@ -1,10 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { TGenre, IUser, newUser } from '../../shared/models/user.model';
+import {
+	TAllowanceFrequence,
+	TGenre,
+	IUser,
+	newUser,
+	IAuthUser,
+	AppState
+} from '../../shared/models/barrel-models';
+
+import { Observable } from 'rxjs/Observable';
+
 
 interface IGenre {
 	name: string;
 	value: TGenre;
+}
+
+interface IFrequence {
+	name: string;
+	value: TAllowanceFrequence;
 }
 
 @Component({
@@ -20,6 +36,7 @@ export class FirstTimeComponent implements OnInit {
 	};
 
 	public step: number;
+	public nSteps = 2;
 	public genres: IGenre[] = [
 		{
 			name: 'Menino',
@@ -30,14 +47,26 @@ export class FirstTimeComponent implements OnInit {
 			value: 'W'
 		}
 	];
+	public frequences: IGenre[] = [
+		{
+			name: 'Semanalmente',
+			value: 'W'
+		},
+		{
+			name: 'Mensalmente',
+			value: 'M'
+		}
+	];
 
 
 
 	public user: IUser;
+	public authUser: Observable<IAuthUser>;
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
   	this.step = 0;
   	this.user = newUser();
+  	this.authUser = this.store.select('auth');
   }
 
   ngOnInit() {
@@ -51,7 +80,11 @@ export class FirstTimeComponent implements OnInit {
   	this.user.genre = genre;
   }
 
-  bla(){
+  public changeAllowanceFreq(freq: TAllowanceFrequence): void {
+  	this.user.frequence = freq;
+  }
+
+  updateUser(){
   	debugger
   }
 

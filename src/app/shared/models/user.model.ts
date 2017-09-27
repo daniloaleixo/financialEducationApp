@@ -30,7 +30,7 @@ export function newUser(): IUser {
 		frequence: 'W',
 		amount: 0,
 		experience: 0,
-		level: 0,
+		level: 1,
 		genre: 'M'
 	};
 }

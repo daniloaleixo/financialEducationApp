@@ -11,7 +11,9 @@ import {
 	MdButtonModule,
 	MdSelectModule,
 	MdDatepickerModule,
-	MdNativeDateModule
+	MdNativeDateModule,
+  MdRadioModule,
+  MdInputModule,
 } from '@angular/material';
 import { FirstTimeComponent } from './first-time/first-time.component';
 
@@ -25,7 +27,9 @@ import { FirstTimeComponent } from './first-time/first-time.component';
     MdSelectModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    MdRadioModule,
+    MdInputModule
   ],
   declarations: [TutorialComponent, FirstTimeComponent]
 })
