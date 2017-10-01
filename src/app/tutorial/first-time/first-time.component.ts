@@ -91,7 +91,7 @@ export class FirstTimeComponent implements OnInit {
 
   finish(): void {
   	this.tutorialService.finishFirstTime(this.user)
-  		.then(() => this.router.navigate([routes_constants.init]));
+  		.then(() => this.router.navigate([routes_constants.init.path]));
   }
 
 }

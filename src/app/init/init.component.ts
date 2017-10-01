@@ -27,9 +27,11 @@ export class InitComponent extends ParentComponent implements OnInit {
   ngOnInit() {
   	this.store.select('user')
   		.subscribe((user: IUser) => {
-        if(user)
+        if(user) {
+          if(!(user.firstTime == false)) this.router.navigate([routes_constants.firstTime.path]);
           this.userMissions = user.userMissions
             .filter(mission => mission.status == mission_status.inProgress);
+        }
       });
   }
 
