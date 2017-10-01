@@ -55,7 +55,7 @@
 	        	</div>
 
 	        	<div *ngSwitchCase="2" style="text-align: center">
-		        		<img class="circle" 
+		        		<img class="circle" style="max-width: 80%;" 
 		        			[src]="(authUser | async).photoURL || '../../assets/avatar.png'">
 		        		
 	        		<p style="margin: 0 1rem;">

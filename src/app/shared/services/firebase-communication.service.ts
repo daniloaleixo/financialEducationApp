@@ -168,19 +168,21 @@ export class FirebaseCommunicationService {
             userResponse = snapshot[user.uid];
 
             // Transform mission id in IMissions
-            const userMissionsId: DBUserMissionRelationship[] = 
-              Object.keys(snapshot[user.uid].missions)
-              .map(key => snapshot[user.uid].missions[key])
+            if (snapshot[user.uid].missions) {
+              const userMissionsId: DBUserMissionRelationship[] = 
+                Object.keys(snapshot[user.uid].missions)
+                .map(key => snapshot[user.uid].missions[key])
 
-            // Put the missions
-            userResponse.userMissions = userMissionsId
-              .map((missionRel: DBUserMissionRelationship) => {
-                return {
-                  status: missionRel.status,
-                  progress: missionRel.progress,
-                  ... this.missionHash[missionRel.idMission],
-                }
-              });
+              // Put the missions
+              userResponse.userMissions = userMissionsId
+                .map((missionRel: DBUserMissionRelationship) => {
+                  return {
+                    status: missionRel.status,
+                    progress: missionRel.progress,
+                    ... this.missionHash[missionRel.idMission],
+                  }
+                });
+            } else userResponse.userMissions = [];
 
             resolve(userResponse);
           } 
