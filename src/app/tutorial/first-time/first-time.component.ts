@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import {
@@ -9,6 +10,8 @@ import {
 	IAuthUser,
 	AppState
 } from '../../shared/models/barrel-models';
+import { TutorialService } from '../tutorial.service';
+import { routes_constants } from '../../shared/constants/barrel-constants';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -63,7 +66,9 @@ export class FirstTimeComponent implements OnInit {
 	public user: IUser;
 	public authUser: Observable<IAuthUser>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+  						private router: Router,
+  						private tutorialService: TutorialService) {
   	this.step = 0;
   	this.user = newUser();
   	this.authUser = this.store.select('auth');
@@ -84,8 +89,9 @@ export class FirstTimeComponent implements OnInit {
   	this.user.frequence = freq;
   }
 
-  updateUser(){
-  	debugger
+  finish(): void {
+  	this.tutorialService.finishFirstTime(this.user)
+  		.then(() => this.router.navigate([routes_constants.init]));
   }
 
 }

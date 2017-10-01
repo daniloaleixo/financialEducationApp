@@ -5,7 +5,8 @@ import {
 	IRequest,
 	IResponse,
 	ILoginRequest,
-  IAddMissionRequest
+  IAddMissionRequest,
+  IFinishFirstTimeRequest
 } from '../models/communication.model';
 import { communication_constant } from '../constants/communication.constant';
 
@@ -45,11 +46,16 @@ export class ServerCommunicationService {
       // Add Mission
       case communication_constant.addMission:
         return this.firebaseComm.addMission(<IAddMissionRequest>request);
+
+      // First Time Form
+      case communication_constant.finishFirstTime:
+        return this.firebaseComm.updateUserInfo((<IFinishFirstTimeRequest>request).user);
+
+
   		default:
-  			// code...
-  			break;
+  			throw "Não conheço esse request";
+        
   	}
-  	return ;
   }
 
 }

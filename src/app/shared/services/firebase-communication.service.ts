@@ -192,4 +192,20 @@ export class FirebaseCommunicationService {
   }
 
 
+  public updateUserInfo(user: IUser): Promise<IUser> {
+    return new Promise<IUser>((resolve, reject) => {
+      this.user
+      .filter(authUser => user != null)
+      .subscribe((authUser: firebase.User) => {
+        if (this.user) {
+          this.db.object(`/${authUser.uid}`)
+          .set(user)
+          .then((res) => resolve(user))
+          .catch((error: Error) => reject(errorMessages.updateUserError));
+        } else reject(errorMessages.updateUserError);
+      })
+    })
+  }
+
+
 }

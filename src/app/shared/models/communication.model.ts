@@ -17,9 +17,10 @@ export interface IAddMissionRequest extends IRequest {
 	idMission: string;
 }
 
-export interface IAddMissionResponse extends IResponse {
-	userMission: IUserMission;
+export interface IFinishFirstTimeRequest extends IRequest {
+	user: IUser;
 }
+
 
 
 
@@ -34,4 +35,8 @@ export interface ILoginResponse extends IResponse {
 export interface IInitResponse extends IResponse {
 	missions: TMissionHash;
 	user: IUser;
+}
+
+export interface IAddMissionResponse extends IResponse {
+	userMission: IUserMission;
 }

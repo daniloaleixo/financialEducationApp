@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { TutorialComponent } from './tutorial.component';
 import { MyDatePickerModule } from 'mydatepicker';
 
+import { TutorialService } from './tutorial.service';
+
 import {
 	MdIconModule,
 	MdButtonModule,
@@ -31,6 +33,7 @@ import { FirstTimeComponent } from './first-time/first-time.component';
     MdRadioModule,
     MdInputModule
   ],
-  declarations: [TutorialComponent, FirstTimeComponent]
+  declarations: [TutorialComponent, FirstTimeComponent],
+  providers: [TutorialService]
 })
 export class TutorialModule { }
