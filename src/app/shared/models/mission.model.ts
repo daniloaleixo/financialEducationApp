@@ -4,6 +4,7 @@ export interface IMission {
 	description: string;
 	photoURL: string;
 	points: number;
+	missionType: string;
 }
 
 export type TMissionHash = {

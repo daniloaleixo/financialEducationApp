@@ -8,10 +8,18 @@ import {
 	IMission,
 	IUserMission,
 	IUser,
+  IAddMissionRequest,
 	ParentComponent
 } from '../../shared/models/barrel-models';
 import { ChangeHeaderText } from '../../shared/actions/barrel-actions';
-import { routes_constants } from '../../shared/constants/barrel-constants';
+import {
+  routes_constants,
+  communication_constant,
+  mission_status
+} from '../../shared/constants/barrel-constants';
+
+import { ToastService } from '../../shared/services/toast.service';
+import { MissionsService } from '../missions.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -20,7 +28,7 @@ import 'rxjs/add/observable/combineLatest';
 
 @Component({
   selector: 'app-mission-details',
-  templateUrl: './mission-details.component.html',
+      templateUrl: './mission-details.component.html',
   styleUrls: ['./mission-details.component.scss']
 })
 export class MissionDetailsComponent extends ParentComponent implements OnInit {
@@ -29,6 +37,8 @@ export class MissionDetailsComponent extends ParentComponent implements OnInit {
 	public isUserMission = false; 
 
   constructor(private route: ActivatedRoute,
+              private missionsService: MissionsService,
+              private toast: ToastService,
   						private store: Store<AppState>) {
   	super();
   	this.store.dispatch(new ChangeHeaderText(routes_constants.missionDetails.header));
@@ -57,6 +67,19 @@ export class MissionDetailsComponent extends ParentComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  addMission(mission: IUserMission): void {
+    this.missionsService.addMission(<IAddMissionRequest>{
+      idMission: mission.id,
+      requestType: communication_constant.addMission
+    })
+    .then(res => {
+      // Also set this mission as unclickable
+      mission.status = mission_status.inProgress;
+      this.toast.openSnackBar(res, '')
+    })
+    .catch(err => this.toast.openSnackBar(err, ''));
   }
 
 }

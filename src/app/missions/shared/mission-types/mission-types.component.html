@@ -1,0 +1,9 @@
+<span [ngSwitch]="mission.missionType">
+
+	<!-- domestic_shores -->
+	<span *ngSwitchCase="mission_types.domestic_shores">
+		<app-domestic-chores [mission]="mission"></app-domestic-chores>
+	</span>
+
+	<span *ngSwitchDefault>Não existe esse tipo de missão</span>
+</span>

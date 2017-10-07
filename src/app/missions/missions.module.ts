@@ -6,6 +6,8 @@ import { MdCardModule, MdButtonModule, MdIconModule } from '@angular/material';
 
 import { MissionsService } from './missions.service';
 import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { DomesticChoresComponent } from './shared/mission-types/domestic-chores/domestic-chores.component';
+import { MissionTypesComponent } from './shared/mission-types/mission-types.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { MissionDetailsComponent } from './mission-details/mission-details.compo
     MdButtonModule,
     MdIconModule
   ],
-  declarations: [ViewMissionsComponent, MissionDetailsComponent],
+  declarations: [ViewMissionsComponent, MissionDetailsComponent, DomesticChoresComponent, MissionTypesComponent],
   providers: [MissionsService]
 })
 export class MissionsModule { }

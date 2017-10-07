@@ -12,7 +12,9 @@
 	<div class="row">
 		<div class="col s12">
 			<h4>{{ mission.title }}</h4>
-			<p *ngIf="isUserMission">Progresso: {{ mission.progress }}%</p>
+			<p *ngIf="mission.status == mission_status.inProgress">
+				Progresso: {{ mission.progress }}%
+			</p>
 			<p>{{ mission.description }}</p>
 		</div>
 	</div>
@@ -21,12 +23,17 @@
 	<div class="row">
 		<div class="col s12">
 			<button md-raised-button color="accent"
-				*ngIf="!isUserMission" 
+				*ngIf="mission.status == mission_status.toDo" 
 				(click)="addMission(mission)"
 				style="width: 100%">FAZER ESSA MISSÃO</button>
 		</div>
 	</div>
 
 	<!-- If user IS subscribed in this mission -->
+	<div class="row" *ngIf="mission.status == mission_status.inProgress"> 
+		<div class="col s12">
+				<app-mission-types [mission]="mission"></app-mission-types>
+		</div>
+	</div>
 
 </div>
