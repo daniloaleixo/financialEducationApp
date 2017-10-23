@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col s12">
 			<button md-raised-button color="accent"
-				*ngIf="mission.status == mission_status.toDo" 
+				*ngIf="!isUserMission" 
 				(click)="addMission(mission)"
 				style="width: 100%">FAZER ESSA MISSÃO</button>
 		</div>

@@ -6,6 +6,7 @@ import {
 	IResponse,
 	ILoginRequest,
   IAddMissionRequest,
+  IUpdateMissionRequest,
   IFinishFirstTimeRequest
 } from '../models/communication.model';
 import { communication_constant } from '../constants/communication.constant';
@@ -46,6 +47,9 @@ export class ServerCommunicationService {
       // Add Mission
       case communication_constant.addMission:
         return this.firebaseComm.addMission(<IAddMissionRequest>request);
+      // Update Mission
+      case communication_constant.updateMission:
+        return this.firebaseComm.updateUserInfo((<IUpdateMissionRequest>request).user);
 
       // First Time Form
       case communication_constant.finishFirstTime:

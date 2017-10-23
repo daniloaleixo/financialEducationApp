@@ -6,5 +6,6 @@ export const communication_constant = {
 	logout: 4,
 	init: 5,
 	addMission: 6,
-	finishFirstTime: 7
+	finishFirstTime: 7,
+	updateMission: 8
 };

@@ -21,6 +21,11 @@ export interface IUserMission extends IMission {
 	progress: number;
 }
 
+export interface IUserDomesticShoreMission extends IUserMission {
+	domesticShore: string;
+	provePhoto: string;
+}
+
 export function newUser(): IUser {
 	return {
 		firstTime: true,

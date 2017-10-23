@@ -12,6 +12,13 @@ export function userReducer(state: IUser = null, action: ActionImplementation): 
 			state.userMissions.push(<IUserMission>action.payload);
 			return state;
 
+		case User.UpdateMissionUser.type:
+			const payload: IUserMission = <IUserMission>action.payload;
+			state.userMissions.map(mission => {
+				if (mission.id == payload.id) mission = payload;
+			});
+			return state;
+
 		default:
 			return state;
 	}

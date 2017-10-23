@@ -4,13 +4,16 @@ import { Store } from '@ngrx/store';
 import {
   IAddMissionRequest,
   IAddMissionResponse,
+  IUpdateMissionRequest,
+  IResponse,
   IUserMission,
   AppState,
   IMission,
+  IUser,
   TMissionHash
 } from '../shared/models/barrel-models';
-import { AddMissionUser } from '../shared/actions/barrel-actions';
-import { sucessMessages, errorMessages } from '../shared/constants/barrel-constants';
+import { AddMissionUser, UpdateMissionUser } from '../shared/actions/barrel-actions';
+import { sucessMessages, errorMessages, communication_constant } from '../shared/constants/barrel-constants';
 
 import { ServerCommunicationService } from '../shared/services/server-communication.service';
 
@@ -39,6 +42,28 @@ export class MissionsService {
         reject(errorMessages.addMissionError)
       });
   	})
+  }
+
+  updateMission(mission: IUserMission): Promise<string> {
+      
+
+    return new Promise<string>((resolve, reject) => {
+      this.store.dispatch(new UpdateMissionUser(mission));
+      
+      this.store.select('user').subscribe((user: IUser) => {
+        const request: IUpdateMissionRequest = {
+          user: user,
+          requestType: communication_constant.updateMission
+        };
+        this.server.request(request).then((response: IResponse) => {
+          resolve(sucessMessages.updateMissionSucess);
+        })
+        .catch(err => {
+          console.error(err);
+          reject(errorMessages.updateMissionUserError);
+        })
+      });
+    });
   }
 
 }

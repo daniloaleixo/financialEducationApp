@@ -1,3 +1,24 @@
-<p>
-  domestic-chores works!
-</p>
+<div>
+	<div class="row">
+	  <md-input-container class="col s12">
+	    <input mdInput placeholder="Tarefa Escolhida" type="text" [(ngModel)]="mission.domesticShore">
+	  </md-input-container>
+	</div>
+
+	<div class="row">
+		<div class="col s12">
+			<md-checkbox class="example-margin" [(ngModel)]="checked">
+				Terminei
+			</md-checkbox>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col s12">
+			<button md-raised-button color="accent" (click)="update()">
+				Atualizar
+			</button>
+		</div>
+	</div>
+</div>

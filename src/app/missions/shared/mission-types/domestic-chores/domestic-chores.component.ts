@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { IUserMission } from '../../../../shared/models/barrel-models';
+import { IUserDomesticShoreMission } from '../../../../shared/models/barrel-models';
+import { mission_status, communication_constant } from '../../../../shared/constants/barrel-constants';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { MissionsService } from '../../../missions.service';
 
 @Component({
   selector: 'app-domestic-chores',
@@ -9,11 +12,23 @@ import { IUserMission } from '../../../../shared/models/barrel-models';
 })
 export class DomesticChoresComponent implements OnInit {
 
-	@Input() mission: IUserMission;
+	@Input() mission: IUserDomesticShoreMission;
+	public checked = false;
 
-  constructor() { }
+  constructor(private missionsService: MissionsService,
+  						private toast: ToastService) {
+  }
 
   ngOnInit() {
+  	this.checked = this.mission.status == mission_status.completed;
+  }
+
+  update(): void {
+  	if (this.checked) this.mission.status = mission_status.completed;
+  	this.missionsService.updateMission(this.mission)
+  	.then((message) => this.toast.openSnackBar(message, ''))
+  	.catch((message) => this.toast.openSnackBar(message, ''));
+
   }
 
 }

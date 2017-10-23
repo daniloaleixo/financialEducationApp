@@ -2,17 +2,12 @@
 	"missions": [
 		{
 			"id": "afc0cdc7-d6f9-2a78-6013-4e2f9558cbd9",
-			"title": "Mission 1",
+			"title": "Ajudando nas tarefas de casa",
 			"description": "The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting",
-			"photoURL": "",
-			"points": 0
-		},
-		{
-			"id": "58b48da0-eff0-a7f0-2a38-3616d597f61a",
-			"title": "Mission 2",
-			"description": "The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
-			"photoURL": "",
-			"points": 0
+			"photoURL": "https://firebasestorage.googleapis.com/v0/b/financialeducation-e1991.appspot.com/o/washing-dishes.jpg?alt=media&token=8b0d6544-0b49-45be-b232-6435a1b5bbee",
+			"points": 0,
+			"missionType": "domestic_shores",
+			"steps": 1
 		}
 	]
 }

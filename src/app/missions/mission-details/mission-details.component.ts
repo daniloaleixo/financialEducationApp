@@ -62,6 +62,7 @@ export class MissionDetailsComponent extends ParentComponent implements OnInit {
   	  }
   	  // Otherwise I get from the hash
   	  else this.mission = missionHash[idMission];
+
   	},
   	error => console.error('Erro ao tentar fazer o subscription'));
   }
@@ -77,6 +78,7 @@ export class MissionDetailsComponent extends ParentComponent implements OnInit {
     .then(res => {
       // Also set this mission as unclickable
       mission.status = mission_status.inProgress;
+      this.isUserMission = true;
       this.toast.openSnackBar(res, '')
     })
     .catch(err => this.toast.openSnackBar(err, ''));

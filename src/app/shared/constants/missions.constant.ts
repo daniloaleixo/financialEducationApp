@@ -8,3 +8,4 @@ export const mission_status = {
 export const mission_types = {
 	domestic_shores: 'domestic_shores'
 }
+

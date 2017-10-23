@@ -17,6 +17,10 @@ export interface IAddMissionRequest extends IRequest {
 	idMission: string;
 }
 
+export interface IUpdateMissionRequest extends IRequest {
+	user: IUser;
+}
+
 export interface IFinishFirstTimeRequest extends IRequest {
 	user: IUser;
 }

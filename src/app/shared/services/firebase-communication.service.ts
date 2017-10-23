@@ -21,6 +21,7 @@ import {
   newUser,
   IAddMissionRequest,
   IAddMissionResponse,
+  IUpdateMissionRequest,
   IInitResponse,
   DBUserMissionRelationship,
 } from '../models/barrel-models';
@@ -129,7 +130,6 @@ export class FirebaseCommunicationService {
         } else reject(errorMessages.addMissionError);
       })
     });
-
   }
 
 
