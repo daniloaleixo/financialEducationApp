@@ -8,6 +8,15 @@
 			"points": 0,
 			"missionType": "domestic_shores",
 			"steps": 1
+		},
+		{
+			"id": "a56f9838-cfde-11e7-abc4-cec278b6b50a",
+			"title": "Ajudando nas compras para a casa",
+			"description": "Vamos às compras \\o/, sua tarefa é ajudar seus pais nas compras do supermercado, para isso leve sua calculadora e some o valor de cada produto comprado e tenta acertar o total da compra =)",
+			"photoURL": "https://firebasestorage.googleapis.com/v0/b/financialeducation-e1991.appspot.com/o/n-CHILDREN-SUPER-MARKET-628x314.jpg?alt=media&token=495ecdeb-e135-4d67-8011-c628899c03ea",
+			"points": 0,
+			"missionType": "domestic_shores",
+			"steps": 1
 		}
 	]
 }
