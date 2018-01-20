@@ -5,7 +5,8 @@
   "license": "MIT",
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./scripts/run_tests;sh",
+    "deploy": "./scripts/deploy.sh"
   },
   "private": true,
   "dependencies": {
