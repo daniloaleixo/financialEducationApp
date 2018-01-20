@@ -1,10 +1,9 @@
 import { IMission } from './mission.model';
 import { mission_status } from '../constants/barrel-constants';
-
-export type TAllowanceFrequence = 'W' | 'M';
-export type TGenre = 'M' | 'W';
+import { TRole, TGenre, TAllowanceFrequence, TChild } from '../types/barrel-types';
 
 export interface IUser {
+	role: TGenre;
 	firstTime: boolean;
 	userMissions: IUserMission[];
 	birthDate: Date;
@@ -28,6 +27,7 @@ export interface IUserDomesticShoreMission extends IUserMission {
 
 export function newUser(): IUser {
 	return {
+		role: 
 		firstTime: true,
 		userMissions: [],
 		birthDate: new Date(),

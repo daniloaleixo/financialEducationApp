@@ -1,5 +1,4 @@
 
-
 export interface IAuthUser {
 	displayName: string;
 	email: string;
