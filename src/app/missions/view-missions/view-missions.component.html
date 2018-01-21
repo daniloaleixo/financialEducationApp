@@ -3,30 +3,30 @@
 <div class="row">
 	<div class="col s12 m6 l3" *ngFor="let mission of missions">
 
-		<md-card class="example-card">
-		  <md-card-header>
-		    <md-card-title class="card-title">{{ mission.title }}</md-card-title>
-		  </md-card-header>
-		  <img md-card-image 
+		<mat-card class="example-card">
+		  <mat-card-header>
+		    <mat-card-title class="card-title">{{ mission.title }}</mat-card-title>
+		  </mat-card-header>
+		  <img mat-card-image 
 		  	src="{{ mission.photoURL ? mission.photoURL : 'assets/tela_login.jpg'}}" 
 		  	alt="Photo of the mission">
-		  <md-card-content>
+		  <mat-card-content>
 		    <p>{{ mission.description }}</p>
-		  </md-card-content>
-		  <md-card-actions class="full-width">
+		  </mat-card-content>
+		  <mat-card-actions class="full-width">
 		  	<div style="width: 100%">
-			    <button md-raised-button color="accent"
+			    <button mat-raised-button color="accent"
 			    	*ngIf="mission.status == mission_status.toDo" 
 			    	(click)="addMission(mission)">FAZER ESSA MISSÃO</button>
-		  		<button md-raised-button color="accent"
+		  		<button mat-raised-button color="accent"
 			    	*ngIf="mission.status == mission_status.toDo" 
 			    	(click)="seeDetails(mission)">VER DETALHES</button>
 		  	</div>
-		    <button md-button disabled
+		    <button mat-button disabled
 		    	*ngIf="mission.status == mission_status.inProgress"
-		    	style="width: 100%"><md-icon>check_circle</md-icon> MISSÃO ADICIONADA</button>
-		  </md-card-actions>
-		</md-card>
+		    	style="width: 100%"><mat-icon>check_circle</mat-icon> MISSÃO ADICIONADA</button>
+		  </mat-card-actions>
+		</mat-card>
 		
 	</div>
 </div>

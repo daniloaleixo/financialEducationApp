@@ -35,6 +35,10 @@ export const appRoutes: Routes = [
 			{
 				path: 'missions/:idMission',
 				component: MissionDetailsComponent
+			},
+			{
+				path: 'tutorial',
+				component: TutorialComponent
 			}
 		],
 		component: HomeComponent
@@ -42,10 +46,6 @@ export const appRoutes: Routes = [
 	{
 		path: 'login',
 		component: LoginComponent
-	},
-	{
-		path: 'tutorial',
-		component: TutorialComponent
 	},
 	{
 		path: 'firstTime',

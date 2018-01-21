@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { InitComponent } from './init.component';
 
-import { MdCardModule, MdButtonModule } from '@angular/material';
+import { MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
-    MdCardModule,
-    MdButtonModule,
+    MatCardModule,
+    MatButtonModule,
     RouterModule
   ],
   declarations: [InitComponent]

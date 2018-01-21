@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 
 // Material
-import { MdInputModule, MdButtonModule } from '@angular/material';
+import { MatInputModule, MatButtonModule } from '@angular/material';
 
 
 
@@ -13,8 +13,8 @@ import { MdInputModule, MdButtonModule } from '@angular/material';
     CommonModule,
     FormsModule,
     // Material
-    MdInputModule,
-    MdButtonModule
+    MatInputModule,
+    MatButtonModule
   ],
   declarations: [LoginComponent],
 })

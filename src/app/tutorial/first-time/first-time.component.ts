@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import {
-	TAllowanceFrequence,
-	TGenre,
 	IUser,
 	newUser,
 	IAuthUser,
 	AppState
 } from '../../shared/models/barrel-models';
+import { TAllowanceFrequence, TGenre } from '../../shared/types/barrel-types';
 import { TutorialService } from '../tutorial.service';
 import { routes_constants } from '../../shared/constants/barrel-constants';
 
@@ -43,21 +42,21 @@ export class FirstTimeComponent implements OnInit {
 	public genres: IGenre[] = [
 		{
 			name: 'Menino',
-			value: 'M'
+			value: TGenre.MALE
 		},
 		{
 			name: 'Menina',
-			value: 'W'
+			value: TGenre.FEMALE
 		}
 	];
-	public frequences: IGenre[] = [
+	public frequences: IFrequence[] = [
 		{
 			name: 'Semanalmente',
-			value: 'W'
+			value: TAllowanceFrequence.WEEKLY
 		},
 		{
 			name: 'Mensalmente',
-			value: 'M'
+			value: TAllowanceFrequence.MONTHLY
 		}
 	];
 

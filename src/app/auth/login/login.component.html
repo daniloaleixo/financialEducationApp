@@ -22,24 +22,24 @@
 
 		    <div class="input-content">
 			    <div class="row no-margin-bottom">
-			    	<md-input-container class="col s12">
-			    	  <input mdInput name="email" type="email" 
+			    	<mat-input-container class="col s12">
+			    	  <input matInput name="email" type="email" 
 			    	  placeholder="Digite seu email" 
 			    	  [(ngModel)]="formInfo.email">
-			    	</md-input-container>
+			    	</mat-input-container>
 			    </div>
 
 			    <div class="row no-margin-bottom">
-			    	<md-input-container class="col s12">
-			    	  <input mdInput name="password" [(ngModel)]="formInfo.password" type="password" 
+			    	<mat-input-container class="col s12">
+			    	  <input matInput name="password" [(ngModel)]="formInfo.password" type="password" 
 			    	  placeholder="Digite sua senha" >
-			    	</md-input-container>
+			    	</mat-input-container>
 			    </div>
 			    <div class="row register-form" *ngIf="registerMode">
-			    	<md-input-container class="col s12">
-			    	  <input mdInput name="password" [(ngModel)]="passwordValidator" type="password" 
+			    	<mat-input-container class="col s12">
+			    	  <input matInput name="password" [(ngModel)]="passwordValidator" type="password" 
 			    	  placeholder="Repita a senha" >
-			    	</md-input-container>
+			    	</mat-input-container>
 			    </div>
 		    </div>
 		    
@@ -48,17 +48,17 @@
 
 		    <div class="row login-form" *ngIf="!registerMode">
 		    	<div class="col s12">
-		    		<button md-raised-button color="primary" class="full-width" (click)="login()">Login</button>
+		    		<button mat-raised-button color="primary" class="full-width" (click)="login()">Login</button>
 		    	</div>
 		    </div>
 		    <div class="row register-form" *ngIf="registerMode">
 		    	<div class="col s12">
-		    		<button md-raised-button color="primary" class="full-width" (click)="register()">Registrar</button>
+		    		<button mat-raised-button color="primary" class="full-width" (click)="register()">Registrar</button>
 		    	</div>
 		    </div>
 		    <div class="row">
 		    	<div class="col s12">
-		    		<button md-raised-button color="primary" class="full-width" (click)="loginGoogle()">Entrar com o Google</button>
+		    		<button mat-raised-button color="primary" class="full-width" (click)="loginGoogle()">Entrar com o Google</button>
 		    	</div>
 		    </div>
 

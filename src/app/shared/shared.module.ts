@@ -6,11 +6,11 @@ import { RouterModule } from '@angular/router';
 
 // Material
 import {
-	MdToolbarModule,
-	MdIconModule,
-	MdInputModule,
-	MdButtonModule,
-  MdSnackBarModule
+	MatToolbarModule,
+	MatIconModule,
+	MatInputModule,
+	MatButtonModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { MaterializeModule } from 'angular2-materialize';
 
@@ -29,8 +29,8 @@ import { ToastService } from './services/toast.service'
     CommonModule,
     RouterModule,
     MaterializeModule,
-  	MdToolbarModule,
-    MdSnackBarModule,
+  	MatToolbarModule,
+    MatSnackBarModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],

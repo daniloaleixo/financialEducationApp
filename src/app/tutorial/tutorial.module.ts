@@ -9,13 +9,13 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { TutorialService } from './tutorial.service';
 
 import {
-	MdIconModule,
-	MdButtonModule,
-	MdSelectModule,
-	MdDatepickerModule,
-	MdNativeDateModule,
-  MdRadioModule,
-  MdInputModule,
+	MatIconModule,
+	MatButtonModule,
+	MatSelectModule,
+	MatDatepickerModule,
+	MatNativeDateModule,
+  MatRadioModule,
+  MatInputModule,
 } from '@angular/material';
 import { FirstTimeComponent } from './first-time/first-time.component';
 
@@ -24,14 +24,14 @@ import { FirstTimeComponent } from './first-time/first-time.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    MdIconModule,
-    MdButtonModule,
-    MdSelectModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MyDatePickerModule,
-    MdRadioModule,
-    MdInputModule
+    MatRadioModule,
+    MatInputModule
   ],
   declarations: [TutorialComponent, FirstTimeComponent],
   providers: [TutorialService]

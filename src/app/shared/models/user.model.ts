@@ -1,9 +1,9 @@
 import { IMission } from './mission.model';
-import { mission_status } from '../constants/barrel-constants';
-import { TRole, TGenre, TAllowanceFrequence, TChild } from '../types/barrel-types';
+import { mission_status, CHILD } from '../constants/barrel-constants';
+import { TRole, TGenre, TAllowanceFrequence } from '../types/barrel-types';
 
 export interface IUser {
-	role: TGenre;
+	role: TRole;
 	firstTime: boolean;
 	userMissions: IUserMission[];
 	birthDate: Date;
@@ -27,16 +27,16 @@ export interface IUserDomesticShoreMission extends IUserMission {
 
 export function newUser(): IUser {
 	return {
-		role: 
+		role: TRole.CHILD,
 		firstTime: true,
 		userMissions: [],
 		birthDate: new Date(),
 		receiveAllowance: false,
-		frequence: 'W',
+		frequence: TAllowanceFrequence.WEEKLY,
 		amount: 0,
 		experience: 0,
 		level: 1,
-		genre: 'M'
+		genre: TGenre.MALE
 	};
 }
 
