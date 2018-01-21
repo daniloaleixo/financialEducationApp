@@ -55,6 +55,9 @@ export class ServerCommunicationService {
       case communication_constant.finishFirstTime:
         return this.firebaseComm.updateUserInfo((<IFinishFirstTimeRequest>request).user);
 
+      case communication_constant.getAllUsers:
+        return this.firebaseComm.getAllUsers();
+
 
   		default:
   			throw "Não conheço esse request";

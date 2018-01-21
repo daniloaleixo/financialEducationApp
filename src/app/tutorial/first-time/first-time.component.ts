@@ -6,11 +6,15 @@ import {
 	IUser,
 	newUser,
 	IAuthUser,
-	AppState
+	IRequest,
+	AppState, 
+	ParentComponent
 } from '../../shared/models/barrel-models';
-import { TAllowanceFrequence, TGenre } from '../../shared/types/barrel-types';
+import { TAllowanceFrequence, TGenre, TRole } from '../../shared/types/barrel-types';
 import { TutorialService } from '../tutorial.service';
-import { routes_constants } from '../../shared/constants/barrel-constants';
+import { routes_constants, communication_constant } from '../../shared/constants/barrel-constants';
+
+import { ServerCommunicationService } from '../../shared/services/server-communication.service';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -30,7 +34,7 @@ interface IFrequence {
   templateUrl: './first-time.component.html',
   styleUrls: ['./first-time.component.scss']
 })
-export class FirstTimeComponent implements OnInit {
+export class FirstTimeComponent extends ParentComponent implements OnInit {
 
 	myDatePickerOptions = {
 	  // other options...
@@ -38,7 +42,7 @@ export class FirstTimeComponent implements OnInit {
 	};
 
 	public step: number;
-	public nSteps = 2;
+	public nChildSteps = 3;
 	public genres: IGenre[] = [
 		{
 			name: 'Menino',
@@ -64,16 +68,33 @@ export class FirstTimeComponent implements OnInit {
 
 	public user: IUser;
 	public authUser: Observable<IAuthUser>;
+	public allUsers: IUser[] = [];
 
   constructor(private store: Store<AppState>,
-  						private router: Router,
-  						private tutorialService: TutorialService) {
+				private router: Router,
+				private server: ServerCommunicationService, 
+				private tutorialService: TutorialService) {
+  	super();
   	this.step = 0;
-  	this.user = newUser();
   	this.authUser = this.store.select('auth');
+  	this.getAllUsers();
+
+  	this.authUser
+  	.filter(user => user != null)
+  	.subscribe((user: IAuthUser) => {
+  		this.user = newUser(user.displayName, user.uid);
+  	});
   }
 
   ngOnInit() {
+  }
+
+  private async getAllUsers(): Promise<void> {
+  	const request: IRequest = {
+  		requestType: communication_constant.getAllUsers
+  	}
+  	this.allUsers = <IUser[]>(await this.server.request(request));
+  	debugger
   }
 
   public changeBirthDate(date): void {

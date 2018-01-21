@@ -7,5 +7,6 @@ export const communication_constant = {
 	init: 5,
 	addMission: 6,
 	finishFirstTime: 7,
-	updateMission: 8
+	updateMission: 8,
+	getAllUsers: 9,
 };

@@ -120,7 +120,7 @@ export class FirebaseCommunicationService {
             status: mission_status.inProgress,
             progress: 0
           };
-          this.db.list(`${user.uid}/missions/`)
+          this.db.list(`/users/${user.uid}/missions/`)
           .push(dbMission)
           .then((res) => resolve({
               userMission: {...dbMission, ...this.missionHash[dbMission.idMission]}
@@ -154,7 +154,7 @@ export class FirebaseCommunicationService {
   }
 
   private getUserInfo(): Promise<IUser> {
-    let userResponse: IUser = newUser();
+    let userResponse: IUser = newUser('', '');
 
     return new Promise<IUser>((resolve, reject) => {
       this.user
@@ -164,14 +164,14 @@ export class FirebaseCommunicationService {
         this.databaseSnapshot
         .filter(snapshot => snapshot != null)
         .subscribe(snapshot => {
-          if(snapshot[user.uid]) {
-            userResponse = snapshot[user.uid];
+          if(snapshot['users'] && snapshot['users'][user.uid]) {
+            userResponse = snapshot['users'][user.uid];
 
             // Transform mission id in IMissions
-            if (snapshot[user.uid].missions) {
+            if (snapshot['users'][user.uid].missions) {
               const userMissionsId: DBUserMissionRelationship[] = 
-                Object.keys(snapshot[user.uid].missions)
-                .map(key => snapshot[user.uid].missions[key])
+                Object.keys(snapshot['users'][user.uid].missions)
+                .map(key => snapshot['users'][user.uid].missions[key])
 
               // Put the missions
               userResponse.userMissions = userMissionsId
@@ -200,13 +200,30 @@ export class FirebaseCommunicationService {
       .filter(authUser => user != null)
       .subscribe((authUser: firebase.User) => {
         if (this.user) {
-          this.db.object(`/${authUser.uid}`)
+          this.db.object(`/users/${authUser.uid}`)
           .set(user)
           .then((res) => resolve(user))
           .catch((error: Error) => reject(errorMessages.updateUserError));
         } else reject(errorMessages.updateUserError);
       })
     })
+  }
+
+  public getAllUsers(): Promise<IUser[]> {
+    let users: IUser[] = [];
+
+    return new Promise<IUser[]>((resolve, reject) => {
+      this.databaseSnapshot
+      .filter(db => db != null)
+      .subscribe(db => {
+        if(db['users']) {
+          Object.keys(db['users']).map(key => {
+            users.push(db['users'][key]);
+          });
+        }
+        resolve(users);
+      });
+    });
   }
 
 

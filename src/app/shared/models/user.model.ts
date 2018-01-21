@@ -3,6 +3,8 @@ import { mission_status, CHILD } from '../constants/barrel-constants';
 import { TRole, TGenre, TAllowanceFrequence } from '../types/barrel-types';
 
 export interface IUser {
+	name: string;
+	authID: string;
 	role: TRole;
 	firstTime: boolean;
 	userMissions: IUserMission[];
@@ -25,8 +27,10 @@ export interface IUserDomesticShoreMission extends IUserMission {
 	provePhoto: string;
 }
 
-export function newUser(): IUser {
+export function newUser(name: string, authID: string): IUser {
 	return {
+		name: name,
+		authID: authID,
 		role: TRole.CHILD,
 		firstTime: true,
 		userMissions: [],
