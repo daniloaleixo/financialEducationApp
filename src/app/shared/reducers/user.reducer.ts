@@ -1,5 +1,5 @@
 import * as User from '../actions/user.actions';
-import { IUser, IUserMission, ActionImplementation } from '../models/barrel-models';
+import { IUser, IUserMission, ActionImplementation, DBUserMissionRelationship } from '../models/barrel-models';
 
 
 
@@ -17,6 +17,12 @@ export function userReducer(state: IUser = null, action: ActionImplementation): 
 			state.userMissions.map(mission => {
 				if (mission.id == payload.id) mission = payload;
 			});
+			// Gambs
+			if(state['missions']) {
+				const mission: DBUserMissionRelationship = state['missions']
+				.find((mission: DBUserMissionRelationship) => mission.idMission == payload.id);
+				mission.progress = payload.progress;
+			}
 			return state;
 
 		default:
