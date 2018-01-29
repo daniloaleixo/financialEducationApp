@@ -28,5 +28,10 @@ export const routes_constants = {
 		id: 5,
 		header: '',
 		path: '/firstTime'
+	},
+	dashboard: {
+		id: 6,
+		header: 'Dashboard',
+		path: '/dashboard'
 	}
 };

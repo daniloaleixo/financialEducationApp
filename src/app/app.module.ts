@@ -36,6 +36,7 @@ import { InitModule } from './init/init.module';
 import { TestModule } from './test/test.module';
 import { TutorialModule } from './tutorial/tutorial.module';
 import { MissionsModule } from './missions/missions.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 // My Services
 import { AuthService } from './auth/auth.service';
@@ -80,7 +81,8 @@ import { HomeComponent } from './home.component';
     InitModule,
     TutorialModule,
     TestModule,
-    MissionsModule
+    MissionsModule,
+    DashboardModule
   ],
   bootstrap: [AppComponent],
   providers: [

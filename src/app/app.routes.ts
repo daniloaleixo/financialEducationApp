@@ -15,6 +15,7 @@ import { FirstTimeComponent } from './tutorial/first-time/first-time.component';
 import { ViewMissionsComponent } from './missions/view-missions/view-missions.component';
 import { MissionDetailsComponent } from './missions/mission-details/mission-details.component';
 
+import { ChildDashboardComponent } from './dashboard/child-dashboard/child-dashboard.component';
 
 export const appRoutes: Routes = [
 	{
@@ -39,6 +40,10 @@ export const appRoutes: Routes = [
 			{
 				path: 'tutorial',
 				component: TutorialComponent
+			},
+			{
+				path: 'dashboard',
+				component: ChildDashboardComponent
 			}
 		],
 		component: HomeComponent

@@ -39,16 +39,22 @@
       </div>
     </li>
     <!-- Menu Options -->
-    <li>
+    <li *ngIf="!((user | async)?.childsIDs)">
         <a [routerLink]="routes_constants.init.path">
           <i class="material-icons">home</i>
           Home
         </a>
     </li>
-    <li>
+    <li *ngIf="!((user | async)?.childsIDs)">
         <a [routerLink]="routes_constants.viewMissions.path">
           <i class="material-icons">assignment</i>
           Missoẽs
+        </a>
+    </li>
+    <li *ngIf="(user | async)?.childsIDs">
+        <a [routerLink]="routes_constants.dashboard.path">
+          <i class="material-icons">show_chart</i>
+          Dashboard
         </a>
     </li>
     <li>

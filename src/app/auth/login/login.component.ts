@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ILoginRequest, ParentComponent } from '../../shared/models/barrel-models';
+import { ILoginRequest, ParentComponent, ILoginResponse } from '../../shared/models/barrel-models';
 import { communication_constant } from '../../shared/constants/communication.constant';
 import { routes_constants } from '../../shared/constants/routes.constant';
 
@@ -48,7 +48,12 @@ export class LoginComponent extends ParentComponent	implements OnInit {
 
 	private makeRequest(form: ILoginRequest): void {
 		this.auth.login(this.formInfo)
-		.then(() => this.router.navigate([routes_constants.init.path]))
+		.then((res: ILoginResponse) => {
+			if(res.user && res.user.childsIDs) 
+				this.router.navigate([routes_constants.dashboard.path]);
+			else
+				this.router.navigate([routes_constants.init.path]);
+		})
 		.catch((err: string) => this.toast.openSnackBar(err, ''));
 	}
 
