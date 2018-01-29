@@ -35,7 +35,8 @@
 	      		<div style="display: flex; justify-content: center;">
 	  	        	<div class="input-field" style="width: 50%">
 	  	          		<i class="material-icons prefix">today</i>
-	  	          		<my-date-picker class="datepicker" name="mydate" [options]="myDatePickerOptions" [ngModel]="user.birthDate" #datepicker
+	  	          		<my-date-picker class="datepicker" name="mydate" [options]="myDatePickerOptions" 
+	  	          		[ngModel]="user.birthDate" #datepicker
 	  	          		(ngModelChange)="changeBirthDate($event)" required></my-date-picker>
 	  	        	</div>
 	      		</div>
@@ -95,7 +96,21 @@
 				<!-- If the user is a parent -->
 				<span *ngIf="user.role == TRole.PARENT">
 					<div *ngSwitchCase="1" style="text-align: center">
-						parent
+						<!-- Input -->
+						<mat-form-field class="example-full-width">
+						   <input matInput placeholder="Procure o nome do seu filho" 
+						   [(ngModel)]="searchText"
+						   (input)="handleSearchTextChange()">
+						 </mat-form-field>
+
+						<mat-list class="users-list" role="list" *ngIf="showedUsers && showedUsers.length > 0">
+						  <mat-list-item *ngFor="let user of showedUsers" role="listitem"
+						  [ngClass]="{ 'users-list--active': selectedChild.includes(user) }"
+						  (click)="selectDeselectChild(user)">
+						  	<span>{{ user.name }}</span>
+						  	<mat-icon mat-list-icon *ngIf="selectedChild.includes(user)">clear</mat-icon>
+							</mat-list-item>
+						</mat-list>
 					</div>
 				</span>
 
@@ -109,11 +124,14 @@
 						Voltar
 					</button>
 					<button mat-raised-button color="accent"
-					(click)="step = step + 1" *ngIf="step < nChildSteps">
+					(click)="step = step + 1" 
+					*ngIf="(user.role == TRole.CHILD && step < nChildSteps) 
+					|| (user.role == TRole.PARENT && step < nParentSteps)">
 						Avançar
 					</button>
 					<button mat-raised-button color="accent"
-					(click)="finish()" *ngIf="step == nChildSteps">
+					(click)="finish()" *ngIf="(user.role == TRole.CHILD && step == nChildSteps) 
+					|| (user.role == TRole.PARENT && step == nParentSteps)">
 						Finalizar
 					</button>
       	</div>

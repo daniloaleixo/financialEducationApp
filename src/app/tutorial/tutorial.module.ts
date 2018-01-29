@@ -15,6 +15,7 @@ import {
 	MatDatepickerModule,
 	MatNativeDateModule,
   MatRadioModule,
+  MatListModule,
   MatInputModule,
 } from '@angular/material';
 import { FirstTimeComponent } from './first-time/first-time.component';
@@ -31,7 +32,8 @@ import { FirstTimeComponent } from './first-time/first-time.component';
     MatNativeDateModule,
     MyDatePickerModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ],
   declarations: [TutorialComponent, FirstTimeComponent],
   providers: [TutorialService]

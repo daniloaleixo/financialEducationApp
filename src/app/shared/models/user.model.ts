@@ -15,6 +15,8 @@ export interface IUser {
 	experience: number;
 	level: number;
 	genre: TGenre;
+	childs?: IUser[];
+	childsIDs?: string[];
 }
 
 export interface IUserMission extends IMission {

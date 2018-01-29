@@ -11,3 +11,12 @@
 	justify-content: space-around;
 	height: 100%;
 }
+
+.users-list {
+	background-color: white; 
+	border-radius: 10px;
+	
+	&--active {
+		font-weight: bold;
+	}
+}
