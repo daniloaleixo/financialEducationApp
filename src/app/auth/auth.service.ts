@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ILoginRequest, ILoginResponse, IResponse, AppState } from '../shared/models/barrel-models';
-import { AuthChange, Logout } from '../shared/actions/barrel-actions';
+import { UpdateUser, AuthChange, Logout } from '../shared/actions/barrel-actions';
 import { errorMessages, communication_constant } from '../shared/constants/barrel-constants';
 
 import { ServerCommunicationService } from '../shared/services/server-communication.service';
@@ -19,7 +19,8 @@ export class AuthService {
   	return new Promise<ILoginResponse>((resolve, reject) => {
 	  	this.server.request(request)
 	  		.then((response: ILoginResponse) => {
-	  			this.store.dispatch(new AuthChange(response.user));
+	  			this.store.dispatch(new AuthChange(response.authUser));
+          this.store.dispatch(new UpdateUser(response.user));
           this.init.initSystem();
 	  			resolve(response);
 	  		})

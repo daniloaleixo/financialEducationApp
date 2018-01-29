@@ -31,25 +31,25 @@ export class LoginComponent extends ParentComponent	implements OnInit {
   }
 
   public login(): void {
-  	this.formInfo.requestType = communication_constant.login;
+  		this.formInfo.requestType = communication_constant.login;
 		this.makeRequest(this.formInfo);
 	}
 
 	public register(): void {
-  	this.formInfo.requestType = communication_constant.register;
+  		this.formInfo.requestType = communication_constant.register;
 		this.makeRequest(this.formInfo);
 	}
 
 	public loginGoogle(): void {
-  	this.formInfo.requestType = communication_constant.loginGoogle;
-  	this.makeRequest(this.formInfo);
+	  	this.formInfo.requestType = communication_constant.loginGoogle;
+	  	this.makeRequest(this.formInfo);
 	}
 
 
 	private makeRequest(form: ILoginRequest): void {
 		this.auth.login(this.formInfo)
-			.then(() => this.router.navigate([routes_constants.init.path]))
-			.catch((err: string) => this.toast.openSnackBar(err, ''));
+		.then(() => this.router.navigate([routes_constants.init.path]))
+		.catch((err: string) => this.toast.openSnackBar(err, ''));
 	}
 
 	private resetForm(): void {

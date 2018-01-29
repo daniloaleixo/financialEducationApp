@@ -33,7 +33,8 @@ export interface IResponse {
 }
 
 export interface ILoginResponse extends IResponse {
-	user: IAuthUser;
+	authUser: IAuthUser;
+	user: IUser;
 }
 
 export interface IInitResponse extends IResponse {

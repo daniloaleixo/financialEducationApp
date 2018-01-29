@@ -73,27 +73,28 @@ export class FirebaseCommunicationService {
   // Will login or register user either by email or by google
   public async loginRegister(request: ILoginRequest): Promise<ILoginResponse> {
   	const myResponse: ILoginResponse = {
-  		user: null
+  		user: null,
+      authUser: null,
   	};
 
     // Login
     if(request.requestType === communication_constant.login)
-      myResponse.user = await this.afAuth.auth
+      myResponse.authUser = await this.afAuth.auth
         .signInWithEmailAndPassword(request.email, request.password);
     
     // Register
     if(request.requestType === communication_constant.register)
-      myResponse.user = await this.afAuth.auth
+      myResponse.authUser = await this.afAuth.auth
         .createUserWithEmailAndPassword(request.email, request.password);
 
     // Login google
     if(request.requestType === communication_constant.loginGoogle){
       const result = await this.afAuth.auth
         .signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      myResponse.user = result.user;
+      myResponse.authUser = result.user;
     }
 
-  	if(myResponse.user == null) 
+  	if(myResponse.authUser == null) 
       console.error('Não consegui fazer o login, deu algum erro');
 
   	return myResponse;
