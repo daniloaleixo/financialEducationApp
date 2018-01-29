@@ -25,6 +25,10 @@ export interface IFinishFirstTimeRequest extends IRequest {
 	user: IUser;
 }
 
+export interface IGetChildrenRequest extends IRequest {
+	authIDs: string[];
+}
+
 
 
 
@@ -44,4 +48,8 @@ export interface IInitResponse extends IResponse {
 
 export interface IAddMissionResponse extends IResponse {
 	userMission: IUserMission;
+}
+
+export interface IGetChildrenResponse extends IResponse {
+	children: IUser[];
 }

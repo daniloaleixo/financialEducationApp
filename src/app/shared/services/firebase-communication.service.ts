@@ -24,6 +24,8 @@ import {
   IUpdateMissionRequest,
   IInitResponse,
   DBUserMissionRelationship,
+  IGetChildrenRequest,
+  IGetChildrenResponse,
 } from '../models/barrel-models';
 import { communication_constant, errorMessages, sucessMessages, mission_status } from '../constants/barrel-constants';
 import { AppState } from '../../app.store';
@@ -225,6 +227,51 @@ export class FirebaseCommunicationService {
         resolve(users);
       });
     });
+  }
+
+  public getAllChild(req: IGetChildrenRequest): Promise<IGetChildrenResponse> {
+    return new Promise<IGetChildrenResponse>((resolve, reject) => {
+
+      const children: IUser[] = [];
+
+      this.databaseSnapshot
+      .filter(snapshot => snapshot != null)
+      .subscribe(snapshot => {
+
+        req.authIDs.map((authID: string) => {
+
+          let child: IUser;
+
+          if(snapshot['users'] && snapshot['users'][authID]) {
+            child = snapshot['users'][authID];
+
+            // Transform mission id in IMissions
+            if (snapshot['users'][authID].missions) {
+              const userMissionsId: DBUserMissionRelationship[] = 
+                Object.keys(snapshot['users'][authID].missions)
+                .map(key => snapshot['users'][authID].missions[key])
+
+              // Put the missions
+              child.userMissions = userMissionsId
+                .map((missionRel: DBUserMissionRelationship) => {
+                  return {
+                    status: missionRel.status,
+                    progress: missionRel.progress,
+                    ... this.missionHash[missionRel.idMission],
+                  }
+                });
+            } else child.userMissions = [];
+
+            children.push(child);
+          }
+
+        }); //End map through authIDs
+
+        resolve({
+          children: children
+        });
+      });
+    })
   }
 
 

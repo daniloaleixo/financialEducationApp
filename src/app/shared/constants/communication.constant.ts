@@ -9,4 +9,5 @@ export const communication_constant = {
 	finishFirstTime: 7,
 	updateMission: 8,
 	getAllUsers: 9,
+	getChildren: 10,
 };

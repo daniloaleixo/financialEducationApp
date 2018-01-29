@@ -7,7 +7,8 @@ import {
 	ILoginRequest,
   IAddMissionRequest,
   IUpdateMissionRequest,
-  IFinishFirstTimeRequest
+  IFinishFirstTimeRequest,
+  IGetChildrenRequest,
 } from '../models/communication.model';
 import { communication_constant } from '../constants/communication.constant';
 
@@ -57,6 +58,9 @@ export class ServerCommunicationService {
 
       case communication_constant.getAllUsers:
         return this.firebaseComm.getAllUsers();
+
+      case communication_constant.getChildren:
+        return this.firebaseComm.getAllChild((<IGetChildrenRequest> request));
 
 
   		default:
