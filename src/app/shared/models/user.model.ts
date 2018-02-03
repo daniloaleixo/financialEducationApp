@@ -19,6 +19,24 @@ export interface IUser {
 	childsIDs?: string[];
 }
 
+
+export class User {
+	userInfo: IUser;
+
+	constructor() {}
+
+	rehydrate(userInfo: IUser) {
+		this.userInfo = userInfo;
+	}
+
+	getMissionsByStatus(status: string): IUserMission[] {
+		const filtered: IUserMission[] = this.userInfo.userMissions
+		.filter((mission: IUserMission) => mission.status == status);
+		debugger
+		return filtered;
+	}
+}
+
 export interface IUserMission extends IMission {
 	status: string;
 	progress: number;
