@@ -1,4 +1,7 @@
 
+
+<h5>Resumo por filho</h5>
+
 <div *ngIf="chartCanLoad" 
 		(chartLoaded)="chartReady = $event" style="margin-bottom: 20px;" 
 		id="pie_chart" [chartData]="pie_ChartData" 
@@ -8,9 +11,13 @@
 <div *ngFor="let child of childrenObjs">
 	<div class="row" style="padding: 0 15px;">
 		<div class="col-sm-12">
-			<img class="circle"
-				[src]="child.userInfo.photoURL || '../../assets/avatar.png'">
-			<h5>{{ child.userInfo.name }}</h5>
+			<div style="display: flex">
+				<img class="circle" style="    width: 40px;
+    height: 40px;
+    margin-right: 20px;" 
+					[src]="child.userInfo.photoURL || '../../assets/avatar.png'">
+				<h5>{{ child.userInfo.name }}</h5>
+			</div>
 			<p>Numero de missões: {{ child.userInfo.userMissions?.length }}</p>
 			<p>Numero de missões completadas: 
 				{{ child.getMissionsByStatus(mission_status.completed)?.length }}</p>
