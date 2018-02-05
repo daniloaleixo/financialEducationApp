@@ -22,7 +22,8 @@ import {
 	FirebaseCommunicationService
 } from './services/firebase-communication.service';
 
-import { ToastService } from './services/toast.service'
+import { ToastService } from './services/toast.service';
+import { GoogleChartsDirective } from './directives/google-charts.directive'
 
 @NgModule({
   imports: [
@@ -32,8 +33,8 @@ import { ToastService } from './services/toast.service'
   	MatToolbarModule,
     MatSnackBarModule,
   ],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, GoogleChartsDirective],
+  exports: [HeaderComponent, GoogleChartsDirective],
   providers: [
     ServerCommunicationService,
     FirebaseCommunicationService,

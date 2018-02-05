@@ -32,7 +32,6 @@ export class User {
 	getMissionsByStatus(status: string): IUserMission[] {
 		const filtered: IUserMission[] = this.userInfo.userMissions
 		.filter((mission: IUserMission) => mission.status == status);
-		debugger
 		return filtered;
 	}
 }

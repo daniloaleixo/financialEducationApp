@@ -1,6 +1,15 @@
+
+<div *ngIf="chartCanLoad" 
+		(chartLoaded)="chartReady = $event" style="margin-bottom: 20px;" 
+		id="pie_chart" [chartData]="pie_ChartData" 
+		[chartOptions] = "pie_ChartOptions" 
+		chartType="ColumnChart" appGoogleChart></div>
+
 <div *ngFor="let child of childrenObjs">
 	<div class="row" style="padding: 0 15px;">
 		<div class="col-sm-12">
+			<img class="circle"
+				[src]="child.userInfo.photoURL || '../../assets/avatar.png'">
 			<h5>{{ child.userInfo.name }}</h5>
 			<p>Numero de missões: {{ child.userInfo.userMissions?.length }}</p>
 			<p>Numero de missões completadas: 
